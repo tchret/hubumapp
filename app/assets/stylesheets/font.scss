@@ -1,0 +1,59 @@
+
+@font-face {
+ font-family: "Atlas TR";
+ src: font-url('atlas/atlas_typewriter_thin.eot');
+ src: font-url('atlas/atlas_typewriter_thin.otf') format('otf'),
+      font-url('atlas/atlas_typewriter_thin.woff') format('woff'),
+      font-url('atlas/atlas_typewriter_thin.svg') format('svg'),
+      font-url('atlas/atlas_typewriter_thin.ttf') format('truetype');
+ font-weight: 100;
+}
+
+@font-face {
+ font-family: "Atlas TR";
+ src: font-url('atlas/atlas_typewriter_detail_regular.eot');
+ src: font-url('atlas/atlas_typewriter_detail_regular.otf')  format('otf'),
+      font-url('atlas/atlas_typewriter_detail_regular.woff') format('woff'),
+      font-url('atlas/atlas_typewriter_detail_regular.svg')  format('svg'),
+      font-url('atlas/atlas_typewriter_detail_regular.ttf')  format('truetype');
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Atlas TR";
+ src: font-url('atlas/atlas_typewriter_medium.eot');
+ src: font-url('atlas/atlas_typewriter_medium.otf') format('otf'),
+      font-url('atlas/atlas_typewriter_medium.woff') format('woff'),
+      font-url('atlas/atlas_typewriter_medium.svg') format('svg'),
+      font-url('atlas/atlas_typewriter_medium.ttf') format('truetype');
+ font-weight: 500;
+}
+
+@font-face {
+ font-family: "Atlas TR";
+ src: font-url('atlas/atlas_typewriter_bold.eot');
+ src: font-url('atlas/atlas_typewriter_bold.otf') format('otf'),
+      font-url('atlas/atlas_typewriter_bold.woff') format('woff'),
+      font-url('atlas/atlas_typewriter_bold.svg') format('svg'),
+      font-url('atlas/atlas_typewriter_bold.ttf') format('truetype');
+ font-weight: 700;
+}
+
+@font-face {
+ font-family: "Atlas TR";
+ src: font-url('atlas/atlas_typewriter_black.eot');
+ src: font-url('atlas/atlas_typewriter_black.otf') format('otf'),
+      font-url('atlas/atlas_typewriter_black.woff') format('woff'),
+      font-url('atlas/atlas_typewriter_black.svg') format('svg'),
+      font-url('atlas/atlas_typewriter_black.ttf') format('truetype');
+ font-weight: 900;
+}
+
+:root {
+  font-family: 'Atlas TR';
+  font-weight: 300;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: -1px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
