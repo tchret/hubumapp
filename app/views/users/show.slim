@@ -1,0 +1,22 @@
+.dashboard
+  .sidebar
+    .sidebar-menu.padded
+      .logo = 'Hubum'
+      .sidebar-menu-username-container
+        .sidebar-menu-bubble
+        .sidebar-menu-username = current_user.username
+      .sidebar-menu-item
+
+  main.main
+    .navbar-wrapper
+      .navbar
+        .navbar-main
+          .navbar-avatar
+            = image_tag current_user.facebook_picture_url, class: 'avatar'
+          .navbar-user-infos
+            .navbar-user-name
+              = "#{current_user.first_name} #{current_user.last_name}"
+            .navbar-user-alias
+              = "@#{current_user.username}"
+        .navbar-menu
+          .navbar-menu-item.is-cta = "⚡️ new track"
