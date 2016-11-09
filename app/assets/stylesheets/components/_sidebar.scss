@@ -1,10 +1,15 @@
+.sidebar-channels {
+  margin-top: 20px;
+  padding-right: 20px;
+}
+
 .sidebar {
   background: #232323;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 200px;
+  width: 220px;
   z-index: 3;
 }
 
@@ -18,9 +23,10 @@
 .sidebar-menu {
   position: relative;
   cursor: pointer;
+  background: rgba(0,0,0,0);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0,0,0,0.2);
   }
 }
 
@@ -49,25 +55,45 @@
   right: 0;
   top: 0;
   bottom: 0;
-  height: 6px;
-  width: 6px;
+  height: 4px;
+  width: 4px;
   background: white;
   opacity: .4;
   margin: auto;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 20px;
 
   &:after, &:before {
     content: '';
-    height: 6px;
-    width: 6px;
+    height: 4px;
+    width: 4px;
     background: white;
     position: absolute;
-    left: -12px;
+    left: -10px;
     border-radius: 50%;
   }
 
   &:before {
-    left: -24px;
+    left: -20px;
+  }
+}
+
+.sidebar-channel-item {
+  padding: 6px 0;
+  border-radius: 0 5px 5px 0;
+  padding-top: 8px;
+  color: rgba(white, .5);
+  padding-left: 20px;
+  cursor: pointer;
+
+  span {
+    margin-right: 10px;
+  }
+
+  &.is-active {
+    cursor: default;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.41);
   }
 }

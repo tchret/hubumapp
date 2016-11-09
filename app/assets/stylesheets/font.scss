@@ -52,8 +52,13 @@
   font-family: 'Atlas TR';
   font-weight: 300;
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  font-family: atlas tr;
+  letter-spacing: -1px;
 }

@@ -1,0 +1,33 @@
+.input {
+  padding: 9px 12px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-weight: 300;
+  display: inline-block;
+  user-select: none;
+  border: none;
+  outline: none;
+  padding-top: 11px;
+  padding-left: 32px;
+
+  &:focus {
+    background: linear-gradient(#fff, #FAFAFA);
+  }
+
+  &.search {
+    width: 200px;
+  }
+  &-container { position: relative }
+
+  &-container span {
+    position: absolute;
+    margin: auto;
+    margin-left: 10px;
+    padding-top: 4px;
+    bottom: 0;
+    top: 0;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+  }
+}

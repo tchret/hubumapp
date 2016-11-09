@@ -6,17 +6,33 @@
         .sidebar-menu-bubble
         .sidebar-menu-username = current_user.username
       .sidebar-menu-item
+    .sidebar-channels
+      .sidebar-channel-item.is-active
+        span = '👑'
+        = 'library'
+      .sidebar-channel-item
+        span = '🔥'
+        = 'discover'
+
 
   main.main
     .navbar-wrapper
       .navbar
         .navbar-main
-          .navbar-avatar
-            = image_tag current_user.facebook_picture_url, class: 'avatar'
           .navbar-user-infos
-            .navbar-user-name
-              = "#{current_user.first_name} #{current_user.last_name}"
-            .navbar-user-alias
-              = "@#{current_user.username}"
+            .navbar-username
+              = "@#{@user.username}"
+            .navbar-user-fullname
+              = "#{@user.first_name} #{@user.last_name}"
         .navbar-menu
-          .navbar-menu-item.is-cta = "⚡️ new track"
+          = react_component 'SearchInput', {}, {prerender: true}
+    .main-content
+      .user-profile
+        .user-profile-avatar
+          = image_tag @user.facebook_picture_url.gsub('100', '300')
+        div
+          .user-profile-fullname
+            = "#{@user.first_name} #{@user.last_name}"
+          .user-profile-tagline
+            = 'Digger by day, digger by night'
+

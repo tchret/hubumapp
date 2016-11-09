@@ -10,7 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require js-routes
+//= require PubSubJS
 //= require react
 //= require react_ujs
+//= require axios
 //= require components
 //= require_tree .

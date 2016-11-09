@@ -20,6 +20,14 @@ gem 'devise'
 gem 'figaro'
 gem 'simple_form'
 gem 'slim'
+gem 'yt'
+gem "js-routes"
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-axios'
+  gem 'rails-assets-classnames'
+  gem 'rails-assets-mroderick--PubSubJS'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -33,6 +41,8 @@ gem 'slim'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry'
+  gem 'annotate'
 end
 
 group :development do

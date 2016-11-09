@@ -1,0 +1,35 @@
+.loader-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  margin: auto;
+  height: 35px;
+  width: 35px;
+}
+
+.loader {
+  animation-name: rotate;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  background-image: url(http://producthunt.com/assets/5827062f2627da2e07bc154e063dfafc.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  display: inline-flex;
+  content: space;
+  min-height: 25px;
+  min-width: 25px;
+  transition: opacity .1s ease;
+  height: 100%;
+  width: 100%;
+  width: 35px;
+  height: 35px;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
