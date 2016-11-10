@@ -27,6 +27,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-axios'
   gem 'rails-assets-classnames'
   gem 'rails-assets-mroderick--PubSubJS'
+  gem 'rails-assets-mdi'
 end
 
 # Use ActiveModel has_secure_password

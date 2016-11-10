@@ -19,7 +19,7 @@
   }
   &-container { position: relative }
 
-  &-container span {
+  &-container > span {
     position: absolute;
     margin: auto;
     margin-left: 10px;

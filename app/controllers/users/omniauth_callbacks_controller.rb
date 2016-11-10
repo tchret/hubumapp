@@ -2,9 +2,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
     if user.persisted?
-      sign_in_and_redirect user, event: :authentication
+      sign_in user, event: :authentication
       if user.username
-        redirect_to users_show
+        redirect_to library_path(user.username)
       else
        redirect_to users_welcome_path
       end
