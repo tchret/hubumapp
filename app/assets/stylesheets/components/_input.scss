@@ -9,6 +9,7 @@
   outline: none;
   padding-top: 11px;
   padding-left: 32px;
+  z-index: 1;
 
   &:focus {
     background: linear-gradient(#fff, #FAFAFA);
@@ -24,6 +25,7 @@
     margin: auto;
     margin-left: 10px;
     padding-top: 4px;
+    z-index: 2;
     bottom: 0;
     top: 0;
     vertical-align: middle;

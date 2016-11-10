@@ -1,42 +1,35 @@
-.popover-search-container {
-  display: block;
+.popover-search {
+  box-shadow: rgba(72, 72, 72, 0.29804) 0px 6px 20px, rgba(84, 70, 35, 0.13725) 0px 1px 3px, rgba(0, 0, 0, 0.07843) 0px 0px 1px;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  margin-top: 50px;
   z-index: 4;
-  margin-top: 60px;
+  top: 0;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 200px;
+  position: absolute;
+  right: 0;
+  max-height: 75vh;
+  background: #FAFAFA;
+  max-width: 300px;
+  width: 300px;
 
-  .popover-search {
-    box-shadow: rgba(72, 72, 72, 0.29804) 0px 6px 20px, rgba(84, 70, 35, 0.13725) 0px 1px 3px, rgba(0, 0, 0, 0.07843) 0px 0px 1px;
-    border-radius: 5px;
-    width: 100%;
-    min-height: 200px;
+  &:before {
+    content: '';
     position: absolute;
+    top: 0;
+    left: 0;
     right: 0;
-    margin-right: 20px;
-    margin-top: 15px;
-    max-height: 75vh;
+    width: 50px;
+    clip: rect(-17px, 15px, 15px, -25px);
+    box-shadow: rgba(72,72,72,0) 0px 6px 20px,rgba(84,70,35,0.13725) 0px 1px 3px,rgba(0,0,0,0.07843) 0px 0px 1px;
+    height: 50px;
     background: #FAFAFA;
-    max-width: 300px;
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 50px;
-      clip: rect(-17px, 15px, 15px, -25px);
-      box-shadow: rgba(72,72,72,0) 0px 6px 20px,rgba(84,70,35,0.13725) 0px 1px 3px,rgba(0,0,0,0.07843) 0px 0px 1px;
-      height: 50px;
-      background: #FAFAFA;
-      margin: auto;
-      transform: rotate(45deg);
-    }
+    margin: auto;
+    transform: rotate(45deg);
   }
 }
+
 
 .popover-search-tracks {
   max-height: 60vh;

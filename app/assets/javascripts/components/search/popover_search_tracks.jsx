@@ -59,6 +59,8 @@ class PopoverSearchTracks extends React.Component {
   }
 
   componentWillUnmount() {
-    PubSub.unsubsribe('playStateWithId')
+    PubSub.unsubscribe('playStateWithId')
+    PubSub.unsubscribe('setYoutubeId', this.setLoadingTrack);
+
   }
 }
