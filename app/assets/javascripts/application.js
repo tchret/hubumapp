@@ -15,5 +15,6 @@
 //= require react
 //= require react_ujs
 //= require axios
+//= require lodash
 //= require components
 //= require_tree .

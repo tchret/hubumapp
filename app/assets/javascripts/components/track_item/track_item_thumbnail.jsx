@@ -1,5 +1,6 @@
 class TrackItemThumbnail extends React.Component {
   render() {
+    console.log(this.props.isCurrentTrack, this.props.isPaused)
     return(
       <div className='track-item-thumbnail-container' onClick={this.handleClick}>
         <span className={classNames('track-item-thumbnail-state', {'is-loading': this.props.isCurrentTrack && !this.props.isPaused})}><i className={classNames("mdi", {"mdi-play": (!this.props.isPlaying && !this.props.isCurrentTrack) || this.props.isPaused, "mdi-pause": !this.props.isPaused || this.props.isCurrentTrack })} /></span>
@@ -9,7 +10,7 @@ class TrackItemThumbnail extends React.Component {
   }
 
   handleClick = (e) => {
-    PubSub.publish('setYoutubeId', this.props.id);
+    PubSub.publish('setYoutubeTrack', this.props);
   }
 
 }

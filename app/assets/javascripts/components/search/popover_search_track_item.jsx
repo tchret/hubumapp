@@ -1,20 +1,16 @@
 class PopoverSearchTrackItem extends React.Component {
   render() {
-    var track = this.props
+    var track = this.mountTrack()
     return(
       <div
         className={classNames('popover-search-track-item', {'is-selected': this.props.selected, 'is-playing': this.props.isPlaying, 'is-paused': this.props.isPaused})}
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
       >
-        <TrackItemThumbnail {... this.props} />
+        <TrackItemThumbnail {... track} isCurrentTrack={this.props.isCurrentTrack} isPlaying={this.props.isPlaying} isPaused={this.props.isPaused} />
         <div>
           <div className='popover-search-track-item-title'>{track.title}</div>
           <div className='popover-search-track-item-subtitle'>
-            <div>
-              {track.duration}
-            </div>
-            <hr/>
             <div>
               {track.year}
             </div>
@@ -25,10 +21,19 @@ class PopoverSearchTrackItem extends React.Component {
   }
 
   handleClick = (e) => {
-    this.props.setSelectedId(this.props.id)
+    this.props.setSelectedTrack(this.mountTrack())
   }
 
   handleDoubleClick = (e) => {
-    PubSub.publish('setYoutubeId', this.props.id);
+    PubSub.publish('setYoutubeTrack', this.mountTrack());
+  }
+
+  mountTrack = (track) => {
+    return {
+      id: this.props.id.videoId,
+      title: this.props.snippet.title,
+      thumbnail_url: this.props.snippet.thumbnails.high.url,
+      year: this.props.snippet.publishedAt.substring(0, 4)
+    }
   }
 }

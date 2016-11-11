@@ -36,6 +36,10 @@
   overflow: scroll;
   z-index: 9;
   position: relative;
+
+  &.has-selected-item {
+    padding-bottom: 50px;
+  }
 }
 
 .popover-search-track-item {
@@ -87,4 +91,19 @@
       margin: auto 6px;
     }
   }
+}
+
+.popover-search-button-container {
+  padding: 10px;
+  left: 0;
+  right: 0;
+  background: #FAFAFA;
+  border-radius: 0 0 8px 8px;
+  position: absolute;
+  bottom: 0;
+}
+
+.popover-search-button {
+  width: 100%;
+  text-align: center;
 }

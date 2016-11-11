@@ -26,6 +26,7 @@ gem "js-routes"
 source 'https://rails-assets.org' do
   gem 'rails-assets-axios'
   gem 'rails-assets-classnames'
+  gem 'rails-assets-lodash'
   gem 'rails-assets-mroderick--PubSubJS'
   gem 'rails-assets-mdi'
 end

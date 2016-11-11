@@ -7,7 +7,8 @@
   cursor: pointer;
   user-select: none;
   transition: box-shadow .15s ease;
-  padding-top: 10px;
+  padding-top: 11px;
+  background: white;
 
   &:hover {
     background: linear-gradient(#fff, #FAFAFA);
@@ -24,3 +25,5 @@
     top: 1px;
   }
 }
+
+

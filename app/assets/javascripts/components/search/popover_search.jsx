@@ -8,9 +8,9 @@ class PopoverSearch extends React.Component {
   }
   render() {
     return(
-      <div className={classNames('popover-search', {'is-active': this.state.isActive})} >
+      <div className={classNames('popover-search', {'is-active': this.props.isActive})} >
         {this.props.isLoading && <Loader />}
-        {!this.props.isLoading && <PopoverSearchTracks tracks={this.props.tracks} />}
+        {!this.props.isLoading && <PopoverSearchTracks tracks={this.props.tracks} toggleLoadingStateWithTrack={this.props.toggleLoadingStateWithTrack} />}
       </div>
     )
   }

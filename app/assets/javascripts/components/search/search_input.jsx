@@ -7,7 +7,8 @@ class SearchInput extends React.Component {
       isActive: false,
       tracks: [],
       searchedQuery: null,
-      isVisible: false
+      isVisible: false,
+      publishingTrack: null
     }
   }
   render() {
@@ -17,7 +18,7 @@ class SearchInput extends React.Component {
           🔎
         </span>
         <input ref='input' className='input search' placeholder='search a track' onKeyUp={this.handleSearch} onClick={this.handleClick} />
-        {this.state.isActive && <PopoverSearch isLoading={this.state.isLoading} tracks={this.state.tracks} />}
+        {this.state.isActive && <PopoverSearch isLoading={this.state.isLoading} tracks={this.state.tracks} toggleLoadingStateWithTrack={this.toggleLoadingStateWithTrack} publishingTrack={this.state.publishingTrack} />}
       </div>
     )
   }
@@ -28,10 +29,22 @@ class SearchInput extends React.Component {
       window.clearTimeout(this.state.timer);
       this.state.timer = window.setTimeout(() => {
         this.setState({isLoading: true, isActive: true, searchedQuery: query})
-        axios.get(Routes.search_tracks_path({format: 'json', query: query}))
-          .then((response) => this.setState({tracks: response.data.tracks, isLoading: false}))
-      }, 1000)
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBAk1-_dPOdWsT1aTHC9yCs4Bv6lKbGKDE&q=${query}&type=video`)
+          .then((response) => this.setState({isLoading: false, tracks: response.data.items}))
+      }, 700)
     }
+  }
+
+  toggleLoadingStateWithTrack = (track) => {
+    this.setState({'isLoading': true, publishingTrack: track})
+    axios.get(`https://api.discogs.com/database/search?q=${track.title}&token=ZwQzkINnLtOgZXTCnCfqLYcggUvzYxfVoebWQkeD&type=release`)
+      .then((response) => {
+        console.log(response.data.results[0].thumb)
+        axios.get(response.data.results[0].resource_url)
+          .then((response)=> {
+            console.log(response.data)
+          })
+      })
   }
 
   componentDidMount() {

@@ -2,7 +2,7 @@ class YoutubePlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
+      track: {},
       playerReady: false,
       playState: 0
     }
@@ -10,28 +10,27 @@ class YoutubePlayer extends React.Component {
 
   render() {
     return(
-      <div className={classNames('youtube-player', {'is-active': this.state.id != null})} >
+      <div className={classNames('youtube-player', {'is-active': this.state.track.id != null})} >
         <div id="video"></div>
       </div>
-
     )
   }
 
   componentDidMount() {
-    PubSub.subscribe('setYoutubeId', this.setYoutubeId);
+    PubSub.subscribe('setYoutubeTrack', this.setYoutubeTrack);
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
 
-  setYoutubeId = (msg, id) => {
-    if(id == this.state.id) {
+  setYoutubeTrack = (msg, track) => {
+    if(track.id == this.state.track.id) {
       this.state.playState == 1 ? this.player.pauseVideo() : this.player.playVideo()
     } else {
-      this.setState({ id: id })
+      this.setState({ track: track })
       if(this.state.playerReady) {
-        this.player.loadVideoById(this.state.id);
+        this.player.loadVideoById(this.state.track.id);
       } else {
         this.loadMedia()
       }
@@ -43,7 +42,7 @@ class YoutubePlayer extends React.Component {
     var player;
     var that = this;
      this.player = new YT.Player('video', {
-         videoId: that.state.id,
+         videoId: that.state.track.id,
          playerVars: {
           autoplay: 1,
           showinfo: 0,
@@ -64,7 +63,7 @@ class YoutubePlayer extends React.Component {
 
   onPlayerStateChange = (e) => {
     this.setState({playState: e.data})
-    PubSub.publish('playStateWithId', {playState: e.data, id: this.state.id})
+    PubSub.publish('playStateWithId', {playState: e.data, id: this.state.track.id})
   }
 
   onPlayerReady = (e) => {

@@ -130,6 +130,7 @@ GEM
       sprockets-rails
     rails-assets-axios (0.13.1)
     rails-assets-classnames (2.2.5)
+    rails-assets-lodash (4.15.0)
     rails-assets-mdi (1.5.54)
     rails-assets-mroderick--PubSubJS (1.5.4)
     rails-deprecated_sanitizer (1.0.3)
@@ -216,6 +217,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails-assets-axios!
   rails-assets-classnames!
+  rails-assets-lodash!
   rails-assets-mdi!
   rails-assets-mroderick--PubSubJS!
   react-rails

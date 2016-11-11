@@ -3,8 +3,8 @@ class PopoverSearchTracks extends React.Component {
     super(props)
 
     this.state = {
-      selectedId: null,
-      currentTrackId: null,
+      selectedTrack: {},
+      currentTrack: {},
       nowPlaying: false,
       paused: false
     }
@@ -12,28 +12,38 @@ class PopoverSearchTracks extends React.Component {
   render() {
     return(
       <div className='popover-search-tracks-container'>
-        <div className='popover-search-tracks'>
+        <div className={classNames('popover-search-tracks', {'has-selected-item': !_.isEmpty(this.state.selectedTrack) })}>
           {this.props.tracks.map((track, i) => {
             return(
               <PopoverSearchTrackItem
                 key={i}
                 {... track}
-                selected={track.id == this.state.selectedId}
-                isCurrentTrack={track.id == this.state.currentTrackId}
-                isPlaying={(this.state.nowPlaying && this.state.isCurrentTrack) && !this.state.paused}
-                setSelectedId={this.setSelectedId}
-                isPaused={this.state.currentTrackId == track.id && this.state.paused}
+                selected={track.id.videoId == this.state.selectedTrack.id}
+                isCurrentTrack={track.id.videoId == this.state.currentTrack.id}
+                isPlaying={(this.state.nowPlaying && track.id.videoId == this.state.currentTrack.id) && !this.state.paused}
+                setSelectedTrack={this.setSelectedTrack}
+                isPaused={this.state.currentTrack.id == track.id.videoId && this.state.paused}
               />
             )
             }
           )}
+          {  !_.isEmpty(this.state.selectedTrack) &&
+            <div className='popover-search-button-container'>
+              <a className='popover-search-button btn' onClick={this.addTrack}>✅ Add selected track to library</a>
+            </div>
+          }
         </div>
       </div>
     )
   }
 
-  setSelectedId = (id) => {
-    this.setState({ selectedId: id })
+  addTrack = (e) => {
+    this.props.toggleLoadingStateWithTrack(this.state.selectedTrack)
+    this.setState({ selectedTrack: {} })
+  }
+
+  setSelectedTrack = (track) => {
+    this.setState({ selectedTrack: track })
   }
 
   setplayedId = (msg, data) => {
@@ -50,17 +60,16 @@ class PopoverSearchTracks extends React.Component {
   }
 
   setLoadingTrack = (msg, data) => {
-    this.setState({currentTrackId: data})
+    this.setState({currentTrack: data})
   }
 
   componentDidMount() {
-    PubSub.subscribe('playStateWithId', this.setplayedId);
-    PubSub.subscribe('setYoutubeId', this.setLoadingTrack);
+    this.playStateWithId = PubSub.subscribe('playStateWithId', this.setplayedId);
+    this.setYoutubeId = PubSub.subscribe('setYoutubeTrack', this.setLoadingTrack);
   }
 
   componentWillUnmount() {
-    PubSub.unsubscribe('playStateWithId')
-    PubSub.unsubscribe('setYoutubeId', this.setLoadingTrack);
-
+    PubSub.unsubscribe(this.playStateWithId)
+    PubSub.unsubscribe(this.setYoutubeId)
   }
 }
