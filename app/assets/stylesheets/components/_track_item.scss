@@ -1,0 +1,77 @@
+.tracklist {
+  position: relative;
+  padding: 20px 15px;
+}
+
+.track-item {
+  display: flex;
+  padding: 0 5px;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  user-select: none;
+
+  &-release-title {
+    opacity: .5;
+    margin-top: 2px;
+  }
+
+  &:hover {
+    .track-item-thumbnail-state {
+      display: flex;
+    }
+  }
+
+  &.is-selected {
+    background: #2E8AF7;
+    .track-item-infos {
+      color: white;
+    }
+  }
+
+  .track-item-thumbnail-container {
+    margin: 5px 0px;
+    margin-right: 10px;
+  }
+}
+
+.track-item-cell {
+  padding: 0 10px;
+
+  &:last-child {
+    text-align: right;
+    flex: 0 0 50px;
+    flex: 0 0 56px;
+  }
+
+  &-year {
+    flex: 0 0 100px !important;
+  }
+}
+
+.track-item-cell-primary {
+  flex: 4;
+  text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+}
+
+.track-item-cell-secondary {
+  flex: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+.track-item-infos {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  align-items: center;
+  padding-top: 3px;
+  font-size: 12px;
+  color: black;
+  letter-spacing: -0.5px;
+}

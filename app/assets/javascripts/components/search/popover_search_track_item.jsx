@@ -30,9 +30,9 @@ class PopoverSearchTrackItem extends React.Component {
 
   mountTrack = (track) => {
     return {
-      id: this.props.id.videoId,
+      youtube_id: this.props.id.videoId,
       title: this.props.snippet.title,
-      thumbnail_url: this.props.snippet.thumbnails.high.url,
+      discogs_thumb_url: this.props.snippet.thumbnails.high.url,
       year: this.props.snippet.publishedAt.substring(0, 4)
     }
   }

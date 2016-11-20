@@ -1,7 +1,6 @@
-class PopoverSearchTracks extends React.Component {
+class TrackList extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       selectedTrack: {},
       currentTrack: {},
@@ -9,41 +8,31 @@ class PopoverSearchTracks extends React.Component {
       paused: false
     }
   }
+
   render() {
     return(
-      <div className='popover-search-tracks-container'>
-        <div className={classNames('popover-search-tracks', {'has-selected-item': !_.isEmpty(this.state.selectedTrack) })}>
+      <div className='tracklist-wrapper'>
+        <div className='tracklist'>
           {this.props.tracks.map((track, i) => {
-            return(
-              <PopoverSearchTrackItem
-                key={i}
+            return (
+              <TrackItem
                 {... track}
-                selected={track.id.videoId == this.state.selectedTrack.youtube_id}
-                isCurrentTrack={track.id.videoId == this.state.currentTrack.youtube_id}
-                isPlaying={(this.state.nowPlaying && track.id.videoId == this.state.currentTrack.youtube_id) && !this.state.paused}
+                key={i}
                 setSelectedTrack={this.setSelectedTrack}
-                isPaused={this.state.currentTrack.youtube_id == track.id.videoId && this.state.paused}
+                isSelected={track.id == this.state.selectedTrack.id}
+                isCurrentTrack={track.youtube_id == this.state.currentTrack.youtube_id}
+                isPlaying={(this.state.nowPlaying && track.youtube_id == this.state.currentTrack.youtube_id) && !this.state.paused}
+                isPaused={this.state.currentTrack.youtube_id == track.youtube_id && this.state.paused}
+
               />
             )
-            }
-          )}
-          {  !_.isEmpty(this.state.selectedTrack) &&
-            <div className='popover-search-button-container'>
-              <a className='popover-search-button btn' onClick={this.addTrack}>✅ Add selected track to library</a>
-            </div>
-          }
+          })}
         </div>
       </div>
     )
   }
 
-  addTrack = (e) => {
-    this.props.toggleLoadingStateWithTrack(this.state.selectedTrack)
-    this.setState({ selectedTrack: {} })
-  }
-
   setSelectedTrack = (track) => {
-    console.log(track)
     this.setState({ selectedTrack: track })
   }
 

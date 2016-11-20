@@ -10,7 +10,7 @@ class YoutubePlayer extends React.Component {
 
   render() {
     return(
-      <div className={classNames('youtube-player', {'is-active': this.state.track.id != null})} >
+      <div className={classNames('youtube-player', {'is-active': this.state.track.youtube_id != null})} >
         <div id="video"></div>
       </div>
     )
@@ -25,12 +25,12 @@ class YoutubePlayer extends React.Component {
   }
 
   setYoutubeTrack = (msg, track) => {
-    if(track.id == this.state.track.id) {
+    if(track.youtube_id == this.state.track.youtube_id) {
       this.state.playState == 1 ? this.player.pauseVideo() : this.player.playVideo()
     } else {
       this.setState({ track: track })
       if(this.state.playerReady) {
-        this.player.loadVideoById(this.state.track.id);
+        this.player.loadVideoById(this.state.track.youtube_id);
       } else {
         this.loadMedia()
       }
@@ -42,7 +42,7 @@ class YoutubePlayer extends React.Component {
     var player;
     var that = this;
      this.player = new YT.Player('video', {
-         videoId: that.state.track.id,
+         videoId: that.state.track.youtube_id,
          playerVars: {
           autoplay: 1,
           showinfo: 0,
@@ -63,7 +63,7 @@ class YoutubePlayer extends React.Component {
 
   onPlayerStateChange = (e) => {
     this.setState({playState: e.data})
-    PubSub.publish('playStateWithId', {playState: e.data, id: this.state.track.id})
+    PubSub.publish('playStateWithId', {playState: e.data, id: this.state.track.youtube_id})
   }
 
   onPlayerReady = (e) => {

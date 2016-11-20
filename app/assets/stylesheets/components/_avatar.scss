@@ -1,6 +1,12 @@
 .avatar {
   width: 42px;
-  border-radius: 50%;
   height: 42px;
+  border-radius: 5px;
   display: block;
+  background-color: #FAFAFA;
+
+  &-big {
+    width: 80px;
+    height: 80px;
+  }
 }

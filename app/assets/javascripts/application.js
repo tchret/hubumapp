@@ -11,10 +11,12 @@
 // about supported directives.
 //
 //= require js-routes
+//= require image_loaded.min.js
 //= require PubSubJS
 //= require react
 //= require react_ujs
 //= require axios
+//= require axios_ujs
 //= require lodash
 //= require components
 //= require_tree .

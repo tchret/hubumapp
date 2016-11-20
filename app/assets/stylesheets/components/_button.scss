@@ -9,11 +9,24 @@
   transition: box-shadow .15s ease;
   padding-top: 11px;
   background: white;
+  border: none;
+  outline: 0;
+
 
   &:hover {
     background: linear-gradient(#fff, #FAFAFA);
   }
 
+  &-dark {
+    box-shadow: none;
+    background: #232323;
+    color: white;
+
+    &:hover {
+      background: black;
+      color: white;
+    }
+  }
   &:active {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0px 0px rgba(0, 0, 0, 0.1);
   }

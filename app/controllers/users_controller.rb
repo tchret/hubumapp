@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @tracks = current_user.tracks.order(created_at: :desc)
   end
 
   def update

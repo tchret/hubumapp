@@ -27,6 +27,7 @@
         .navbar-menu
           = react_component 'SearchInput', {}, {prerender: true}
     .main-content
+      = react_component 'BlurredImg', { url: @user.facebook_picture_url.gsub('100', '300') }
       .user-profile
         .user-profile-avatar
           = image_tag @user.facebook_picture_url.gsub('100', '300')
@@ -35,4 +36,5 @@
             = "#{@user.first_name} #{@user.last_name}"
           .user-profile-tagline
             = 'Digger by day, digger by night'
+      = react_component 'TrackList',  render(template: 'tracks/tracklist.jbuilder')
 

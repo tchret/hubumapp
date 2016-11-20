@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.username
         redirect_to library_path(user.username)
       else
-       redirect_to users_welcome_path
+       redirect_to welcome_path
       end
       # set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
     else
