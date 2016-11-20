@@ -43,7 +43,6 @@ class PopoverSearchTracks extends React.Component {
   }
 
   setSelectedTrack = (track) => {
-    console.log(track)
     this.setState({ selectedTrack: track })
   }
 

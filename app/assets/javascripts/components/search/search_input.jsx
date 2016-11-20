@@ -29,7 +29,7 @@ class SearchInput extends React.Component {
 
   toggleLoadingStateWithTrack = (track) => {
     this.setState({'isLoading': true, publishingTrack: track})
-    var firstDiscogsResult, detailedResult, duration
+    var firstDiscogsResult, detailedResult, duration, multiArtists
 
     axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${track.youtube_id}&part=contentDetails&key=AIzaSyBAk1-_dPOdWsT1aTHC9yCs4Bv6lKbGKDE`)
       .then((response) => {
@@ -44,7 +44,7 @@ class SearchInput extends React.Component {
             var multiArtists = false
             var detailedResult = response.data;
             var finalTrack = {}
-            if (detailedResult.artists.length == 1) {
+            if (detailedResult.artists.length == 1 && detailedResult.artists[0].name != 'Various') {
               finalTrack['artist_name'] = detailedResult.artists[0].name
               finalTrack['artist_discogs_id'] = detailedResult.artists[0].id
             } else {
@@ -54,7 +54,11 @@ class SearchInput extends React.Component {
               if (track.title.toLowerCase().indexOf(tracklistItem.title.toLowerCase()) >= 0) {
                 finalTrack['title'] = tracklistItem.title
                 if (multiArtists) {
-                  // TODO
+                  if (tracklistItem.artists.length == 1) {
+                    finalTrack['artist_name'] = tracklistItem.artists[0].name
+                  } else {
+                    // handle multi artist per track
+                  }
                 }
               }
             })
