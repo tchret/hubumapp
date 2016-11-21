@@ -64,14 +64,14 @@ class SearchInput extends React.Component {
 
                 if (finalTrack['title']) {
                   finalTrack['country'] = detailedResult.country;
-                  finalTrack['genre_names'] = detailedResult.genres.join(', ');
-                  finalTrack['style_names'] = detailedResult.styles.join(', ');
+                  finalTrack['genre_names'] = (detailedResult.genres || []).join(', ');
+                  finalTrack['style_names'] = (detailedResult.styles || []).join(', ');
                   finalTrack['release_discogs_id'] = detailedResult.id;
                   finalTrack['release_year'] = firstDiscogsResult.year;
                   finalTrack['release_title'] = detailedResult.title;
                   finalTrack['youtube_id'] = track.youtube_id;
                   finalTrack['release_catno'] = firstDiscogsResult.catno;
-                  finalTrack['release_label_names'] = firstDiscogsResult.label.join(', ')
+                  finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
                   finalTrack['duration'] = duration
 
                   // TODO — LABEL
