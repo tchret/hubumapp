@@ -1,4 +1,5 @@
 class TracksController < ApplicationController
+  before_action :find_track, only: [:destroy]
   def search
     query = params[:query]
     videos = Yt::Collections::Videos.new
@@ -13,6 +14,10 @@ class TracksController < ApplicationController
     current_user.tracks << @track
   end
 
+  def destroy
+    current_user.tracks.delete(@track)
+  end
+
   private
 
   def track_duration
@@ -22,6 +27,10 @@ class TracksController < ApplicationController
     pattern += "%MM" if dur.include? "M"
     pattern += "%SS"
     DateTime.strptime(dur, pattern).seconds_since_midnight.to_i
+  end
+
+  def find_track
+    @track = Track.find(params[:id])
   end
 
   def track_params

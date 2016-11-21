@@ -5,15 +5,19 @@ class TrackList extends React.Component {
       selectedTrack: {},
       currentTrack: {},
       nowPlaying: false,
-      paused: false
+      paused: false,
+      tracks: this.props.tracks
     }
   }
 
   render() {
     return(
       <div className='tracklist-wrapper'>
-        <div className='tracklist'>
-          {this.props.tracks.map((track, i) => {
+        <div className='tracklist' onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+          {this.state.tracks.map((track, i) => {
+            if(i != 0) {
+              track.justAdded = false
+            }
             return (
               <TrackItem
                 {... track}
@@ -23,7 +27,6 @@ class TrackList extends React.Component {
                 isCurrentTrack={track.youtube_id == this.state.currentTrack.youtube_id}
                 isPlaying={(this.state.nowPlaying && track.youtube_id == this.state.currentTrack.youtube_id) && !this.state.paused}
                 isPaused={this.state.currentTrack.youtube_id == track.youtube_id && this.state.paused}
-
               />
             )
           })}
@@ -56,10 +59,55 @@ class TrackList extends React.Component {
   componentDidMount() {
     this.playStateWithId = PubSub.subscribe('playStateWithId', this.setplayedId);
     this.setYoutubeId = PubSub.subscribe('setYoutubeTrack', this.setLoadingTrack);
+    this.addToTracklist = PubSub.subscribe('addToTracklist', this.addToTracklist);
+    window.addEventListener('mousedown', this.pageClick, false);
+    key('backspace', this.onPressDel)
   }
 
   componentWillUnmount() {
+    window.removeEventListener('mousedown', this.pageClick, false);
     PubSub.unsubscribe(this.playStateWithId)
     PubSub.unsubscribe(this.setYoutubeId)
+    PubSub.unsubscribe(this.addToTracklist)
+  }
+
+  addToTracklist = (msg, track) => {
+    var tracks = this.state.tracks
+    track['justAdded'] = true
+    tracks.unshift(track)
+    this.setState({ tracks: tracks })
+  }
+
+  onPressDel = (e) => {
+    if(!_.isEmpty(this.state.selectedTrack) && this.props.isCurrentUserLib) {
+      e.preventDefault();
+      var r = confirm(`Do you really want to delete ${this.state.selectedTrack.title}?`);
+      if (r == true) {
+        axios.railsDelete(Routes.track_path({id: this.state.selectedTrack.id, format: 'json'}))
+          .then((response) => {
+            var tracks = this.state.tracks
+            _.remove(tracks, function(track) { return track.id == response.data.id })
+            this.setState({tracks: tracks})
+            if(this.state.currentTrack.id == response.data.id) {
+              console.log('yo')
+              PubSub.publish('setYoutubeTrack', {});
+            }
+          })
+      }
+    }
+  }
+
+
+  pageClick = (e) => {
+    if (this.mouseIsDownOnPopover) { return }
+    this.setState({ selectedTrack: {} })
+  }
+
+  onMouseDown = () => {
+    this.mouseIsDownOnPopover = true;
+  }
+
+  onMouseUp = () => {
+    this.mouseIsDownOnPopover = false;
   }
 }

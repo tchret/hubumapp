@@ -6,6 +6,10 @@ axios.railsPatch = function(url, data) {
   return axios._action('PATCH', url, data);
 }
 
+axios.railsDelete = function(url, data) {
+  return axios._action('DELETE', url, data);
+}
+
 axios._action = function(verb, url, data) {
   return axios({
     method: verb,

@@ -5,6 +5,7 @@
 
   &-content {
     padding-top: 82px;
+    z-index: 0;
     position: relative;
     min-height: 100vh;
   }
@@ -19,7 +20,7 @@
   height: 60%;
   z-index: 0;
   filter: blur(100px);
-  opacity: .25;
+  opacity: .2;
   background-position: center center;
 
   &-container {

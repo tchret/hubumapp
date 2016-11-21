@@ -1,6 +1,7 @@
 .tracklist {
   position: relative;
   padding: 20px 15px;
+  padding-top: 0;
 }
 
 .track-item {
@@ -10,6 +11,26 @@
   cursor: pointer;
   border-radius: 5px;
   user-select: none;
+  position: relative;
+
+  &-bg {
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+  }
+
+  &.just-added {
+    .track-item-bg {
+      animation: justAdded 1s ease 3s forwards;
+      background: rgba(255, 182, 0, 0.16);
+
+    }
+
+  }
 
   &-release-title {
     opacity: .5;
@@ -23,7 +44,7 @@
   }
 
   &.is-selected {
-    background: #2E8AF7;
+    background: #2E8AF7 !important;
     .track-item-infos {
       color: white;
     }
@@ -32,6 +53,8 @@
   .track-item-thumbnail-container {
     margin: 5px 0px;
     margin-right: 10px;
+    position: relative;
+    z-index: 2;
   }
 }
 
@@ -51,6 +74,8 @@
 
 .track-item-cell-primary {
   flex: 4;
+
+  &:first-child { padding-left: 0 }
 }
 
 .track-item-cell-secondary {
@@ -69,6 +94,14 @@
   align-items: center;
   padding-top: 3px;
   font-size: 12px;
+  position: relative;
+  z-index: 2;
   color: black;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.7px;
+}
+
+@keyframes justAdded {
+  to {
+    background: rgba(255, 182, 0, 0.0);
+  }
 }

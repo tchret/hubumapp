@@ -43,7 +43,7 @@
 }
 
 .popover-search-track-item {
-  padding: 5px 10px;
+  padding: 5px;
   margin: 0 10px;
   border-radius: 5px;
   display: flex;
@@ -58,7 +58,7 @@
   }
 
   &.is-selected {
-    background: rgb(35, 35, 35);
+    background: #2e8af7;
     color: white;
   }
 

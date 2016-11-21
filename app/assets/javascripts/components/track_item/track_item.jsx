@@ -1,7 +1,8 @@
 class TrackItem extends React.Component {
   render() {
     return(
-      <div className={classNames('track-item', {'is-selected': this.props.isSelected})} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
+      <div className={classNames('track-item', {'is-selected': this.props.isSelected, 'just-added': this.props.justAdded})} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} >
+        <div className='track-item-bg' />
         <TrackItemThumbnail {... this.props} isCurrentTrack={this.props.isCurrentTrack} isPlaying={this.props.isPlaying} isPaused={this.props.isPaused} />
         <div className='track-item-infos'>
           <div className='track-item-cell-primary track-item-cell'>
@@ -32,5 +33,13 @@ class TrackItem extends React.Component {
 
   handleDoubleClick = (e) => {
     PubSub.publish('setYoutubeTrack', this.props);
+  }
+
+  componentDidMount() {
+    window.addEventListener('mousedown', this.pageClick, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.pageClick, false);
   }
 }
