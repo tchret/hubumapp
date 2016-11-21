@@ -6,12 +6,17 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'pages#landing'
-  resources :users, only: [:update]
+  resources :users, only: [:update] do
+    member do
+      get :library
+    end
+  end
   resources :tracks, only: [:create, :destroy] do
     collection do
       get :search
     end
   end
+
   get '/welcome', to: 'users#welcome', as: :welcome
   get '/:username', to: 'users#show', as: :library
 

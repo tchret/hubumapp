@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show]
+  before_action :find_user, only: [:show, :library]
 
   def welcome
   end
 
   def show
+    @tracks = @user.tracks.order(created_at: :desc)
+    @users = User.where.not(id: [current_user.try(:id)])
+  end
+
+  def library
     @tracks = @user.tracks.order(created_at: :desc)
   end
 
@@ -25,6 +30,10 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.where('lower(username) = ?', params[:username].downcase).first
+    if params[:username]
+      @user = User.where('lower(username) = ?', params[:username].downcase).first
+    else
+      @user = User.where('lower(username) = ?', params[:id].downcase).first
+    end
   end
 end

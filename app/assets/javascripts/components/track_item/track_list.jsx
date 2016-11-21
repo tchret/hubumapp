@@ -70,12 +70,17 @@ class TrackList extends React.Component {
     this.setYoutubeId = PubSub.subscribe('setYoutubeTrack', this.setLoadingTrack);
     this.addToTracklist = PubSub.subscribe('addToTracklist', this.addToTracklist);
     this.playFirstTrack = PubSub.subscribe('playFirstTrack', this.playFirstTrack);
+    PubSub.subscribe('setLibrary', this.setLibrary)
+
 
     window.addEventListener('mousedown', this.pageClick, false);
     key('backspace', this.onPressDel)
     key('right', this.nextTrack)
     key('left', this.prevTrack)
+  }
 
+  setLibrary = (msg, library) => {
+    this.setState({tracks: library.tracks})
   }
 
   nextTrack = (e) => {

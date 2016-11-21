@@ -1,5 +1,6 @@
-json.partial! 'tracks/tracklist', tracks: @tracks
-json.user do
-  json.extract! @user, :first_name, :id, :last_name, :username
-  json.facebook_picture_url @user.facebook_picture_url.gsub('100', '300')
+json.partial! 'users/library', tracks: @tracks, user: @user
+
+json.users @users do |user|
+  json.extract! user, :username, :id
+  json.facebook_picture_url user.facebook_picture_url
 end

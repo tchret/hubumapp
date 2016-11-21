@@ -1,4 +1,4 @@
-class Main extends React.Component {
+class Library extends React.Component {
   render() {
     return(
       <main className='main'>
@@ -7,7 +7,7 @@ class Main extends React.Component {
             <div className='navbar-main'>
               <div className='navbar-user-infos'>
                 <div className='navbar-username'>
-                  {this.props.user.username}
+                  @{this.props.user.username}
                 </div>
                 <div className='navbar-user-fullname'>
                   {this.props.user.first_name} {this.props.user.last_name}
@@ -34,7 +34,7 @@ class Main extends React.Component {
             </div>
 
           </div>
-          <TrackList {... this.props} />
+          <TrackList tracks={this.props.tracks} />
         </div>
       </main>
     )
