@@ -22,6 +22,8 @@ class YoutubePlayer extends React.Component {
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    key('space', this.handleSpacePress)
   }
 
   setYoutubeTrack = (msg, track) => {
@@ -46,7 +48,7 @@ class YoutubePlayer extends React.Component {
          playerVars: {
           autoplay: 1,
           showinfo: 0,
-          disablekb: 1,
+          disablekb: 0,
           iv_load_policy: 3,
           fs: 0,
           cc_load_policy: 0,
@@ -68,5 +70,14 @@ class YoutubePlayer extends React.Component {
 
   onPlayerReady = (e) => {
     this.setState({playerReady: true})
+  }
+
+  handleSpacePress = (e) => {
+    if(!_.isEmpty(this.state.track)) {
+      this.state.playState == 1 ? this.player.pauseVideo() : this.player.playVideo()
+    } else {
+      PubSub.publish('playFirstTrack')
+    }
+    e.preventDefault();
   }
 }

@@ -47,6 +47,15 @@ class TrackList extends React.Component {
       })
     } else if (data.playState == 2) {
       this.setState({ paused: true })
+    } else if(data.playState == 0) {
+      // if end of track
+      var index = _.findIndex(this.props.tracks, (o) => { return o.id == this.state.currentTrack.id; });
+      if(this.props.tracks[index + 1]) {
+        PubSub.publish('setYoutubeTrack', this.props.tracks[index + 1])
+      } else {
+        PubSub.publish('setYoutubeTrack', {})
+      }
+
     } else {
       this.setState({ nowPlaying: false, paused: false })
     }
@@ -60,8 +69,33 @@ class TrackList extends React.Component {
     this.playStateWithId = PubSub.subscribe('playStateWithId', this.setplayedId);
     this.setYoutubeId = PubSub.subscribe('setYoutubeTrack', this.setLoadingTrack);
     this.addToTracklist = PubSub.subscribe('addToTracklist', this.addToTracklist);
+    this.playFirstTrack = PubSub.subscribe('playFirstTrack', this.playFirstTrack);
+
     window.addEventListener('mousedown', this.pageClick, false);
     key('backspace', this.onPressDel)
+    key('right', this.nextTrack)
+    key('left', this.prevTrack)
+
+  }
+
+  nextTrack = (e) => {
+    if(this.state.currentTrack) {
+      e.preventDefault();
+      var index = this.currentTrackIndex();
+      if(this.state.tracks[index + 1]) {
+        PubSub.publish('setYoutubeTrack', this.state.tracks[index + 1]);
+      }
+    }
+  }
+
+  prevTrack = (e) => {
+    if(this.state.currentTrack) {
+      e.preventDefault();
+      var index = this.currentTrackIndex();
+      if(this.state.tracks[index - 1]) {
+        PubSub.publish('setYoutubeTrack', this.state.tracks[index - 1]);
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -89,11 +123,18 @@ class TrackList extends React.Component {
             _.remove(tracks, function(track) { return track.id == response.data.id })
             this.setState({tracks: tracks})
             if(this.state.currentTrack.id == response.data.id) {
-              console.log('yo')
               PubSub.publish('setYoutubeTrack', {});
             }
           })
       }
+    }
+  }
+
+  playFirstTrack = (e) => {
+    if(_.isEmpty(this.state.selectedTrack)) {
+      PubSub.publish('setYoutubeTrack', this.props.tracks[0])
+    } else {
+      PubSub.publish('setYoutubeTrack', this.state.selectedTrack)
     }
   }
 
@@ -109,5 +150,9 @@ class TrackList extends React.Component {
 
   onMouseUp = () => {
     this.mouseIsDownOnPopover = false;
+  }
+
+  currentTrackIndex = () => {
+    return _.findIndex(this.props.tracks, (o) => { return o.id == this.state.currentTrack.id; });
   }
 }

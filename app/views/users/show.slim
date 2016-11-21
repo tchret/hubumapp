@@ -4,7 +4,7 @@
       .logo = 'Hubum'
       .sidebar-menu-username-container
         .sidebar-menu-bubble
-        .sidebar-menu-username = current_user.username
+        .sidebar-menu-username = current_user.try(:username) || 'guest'
       .sidebar-menu-item
     .sidebar-channels
       .sidebar-channel-item.is-active

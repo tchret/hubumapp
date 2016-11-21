@@ -17,7 +17,7 @@ class TrackItem extends React.Component {
             {this.props.release_year}
           </div>
           <div className='track-item-cell-secondary track-item-cell'>
-            {this.props.style_names}
+            {this.props.style_names || this.props.genre_names}
           </div>
           <div className='track-item-cell-secondary track-item-cell'>
             {this.props.duration}
