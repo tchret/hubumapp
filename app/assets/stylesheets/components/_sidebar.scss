@@ -84,7 +84,10 @@
   padding-top: 8px;
   color: rgba(white, .5);
   padding-left: 20px;
+  display: block;
   cursor: pointer;
+  text-decoration: none;
+  outline: 0;
 
   span {
     margin-right: 10px;
