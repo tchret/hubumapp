@@ -107,3 +107,11 @@
   width: 100%;
   text-align: center;
 }
+
+.popover-search-tracks-empty {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}

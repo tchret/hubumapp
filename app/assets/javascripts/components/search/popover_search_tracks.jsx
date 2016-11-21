@@ -27,6 +27,11 @@ class PopoverSearchTracks extends React.Component {
             )
             }
           )}
+          {_.isEmpty(this.props.tracks) &&
+            <div className='popover-search-tracks-empty'>
+              no result found {_.sample(['😅', '💩', '☘', '🔇'])}
+            </div>
+          }
           {  !_.isEmpty(this.state.selectedTrack) &&
             <div className='popover-search-button-container'>
               <a className='popover-search-button btn' onClick={this.addTrack}>✅ Add selected track to library</a>
