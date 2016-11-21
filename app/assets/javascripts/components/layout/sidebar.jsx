@@ -51,10 +51,10 @@ class Sidebar extends React.Component {
 
   handleLibraryClick = () => {
     if(this.props.isCurrentUserLib) {
+      this.setActiveItem(this.props.user.id)
       axios.get(Routes.library_user_path({id: this.props.user.username, format: 'json'}))
         .then((response) => {
           PubSub.publish('setLibrary', response.data)
-          this.setActiveItem(this.props.user.id)
         })
     }
   }
