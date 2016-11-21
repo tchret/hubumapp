@@ -1,7 +1,14 @@
 class Library extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: false
+    }
+  }
   render() {
     return(
-      <main className='main'>
+      <main className={classNames('main', {'is-loading': this.state.isLoading})}>
+        {this.state.isLoading && <div className='main-loader'>loading</div>}
         <div className='navbar-wrapper'>
           <div className='navbar'>
             <div className='navbar-main'>
@@ -38,5 +45,9 @@ class Library extends React.Component {
         </div>
       </main>
     )
+  }
+
+  componentDidMount() {
+    PubSub.subscribe('libraryIsLoading', (msg, data) => {this.setState({ isLoading: data })})
   }
 }

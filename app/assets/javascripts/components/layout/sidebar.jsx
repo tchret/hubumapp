@@ -11,9 +11,9 @@ class Sidebar extends React.Component {
         <div className='sidebar-menu padded'>
           <div className='logo'>Hubum</div>
           <div className='sidebar-menu-username-container'>
-            <div className={classNames('sidebar-menu-bubble', {'is-offline': !this.props.username })} />
+            <div className={classNames('sidebar-menu-bubble', {'is-offline': !this.props.current_user })} />
             <div className='sidebar-menu-username'>
-              {this.props.username || 'offline'}
+              {this.props.current_user.username || 'offline'}
             </div>
           </div>
         </div>
@@ -50,11 +50,15 @@ class Sidebar extends React.Component {
 
 
   handleLibraryClick = () => {
+    PubSub.publish('libraryIsLoading', true)
+
     if(this.props.isCurrentUserLib) {
       this.setActiveItem(this.props.user.id)
       axios.get(Routes.library_user_path({id: this.props.user.username, format: 'json'}))
         .then((response) => {
           PubSub.publish('setLibrary', response.data)
+          PubSub.publish('libraryIsLoading', false)
+
         })
     }
   }

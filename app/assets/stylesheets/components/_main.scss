@@ -3,6 +3,21 @@
   color: rgba(black, .8);
   background: white;
 
+  &-loader {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: white;
+    margin-left: 220px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b3b3b3;
+  }
+
   &-content {
     padding-top: 82px;
     z-index: 0;
