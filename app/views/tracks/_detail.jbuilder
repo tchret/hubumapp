@@ -12,6 +12,6 @@ json.extract! track,
   :discogs_thumb_url,
   :release_year
 
-json.style_names track.style_names[0..40]
+json.style_names track.style_names ? track.style_names[0..40] : ""
 
 json.duration Time.at(track.duration).utc.strftime("%M:%S")
