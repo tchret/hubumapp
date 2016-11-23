@@ -35,9 +35,11 @@ class Sidebar extends React.Component {
             PEOPLE<span>({this.props.users.length})</span>
           </div>
           {this.props.users.map((user) => {
-            return(
-              <SidebarPeopleItem {... user} user={this.props.user} setActiveItem={this.setActiveItem} isActive={(this.state.selectedId == user.id) || this.props.id == this.props.user.id} />
-            )
+            if(user.has_tracks) {
+              return(
+                <SidebarPeopleItem {... user} user={this.props.user} setActiveItem={this.setActiveItem} isActive={(this.state.selectedId == user.id) || this.props.id == this.props.user.id} />
+              )
+            }
           })}
         </div>
       </div>
