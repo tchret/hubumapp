@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
           <div className='sidebar-menu-username-container'>
             <div className={classNames('sidebar-menu-bubble', {'is-offline': !this.props.current_user })} />
             <div className='sidebar-menu-username'>
-              {this.props.current_user.username || 'offline'}
+              {this.props.current_user ? this.props.current_user.username : 'offline'}
             </div>
           </div>
         </div>
