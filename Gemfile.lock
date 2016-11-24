@@ -37,6 +37,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -79,6 +80,10 @@ GEM
       sprockets-rails
     json (1.8.3)
     jwt (1.5.1)
+    koala (2.2.0)
+      addressable
+      faraday
+      multi_json
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -217,6 +222,7 @@ DEPENDENCIES
   figaro
   jbuilder (~> 2.0)
   js-routes
+  koala
   omniauth-facebook
   pg
   pry

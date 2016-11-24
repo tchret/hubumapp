@@ -22,6 +22,7 @@ gem 'simple_form'
 gem 'slim'
 gem 'yt'
 gem "js-routes"
+gem 'koala'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-axios'
