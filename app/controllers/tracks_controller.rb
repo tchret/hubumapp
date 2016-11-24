@@ -14,8 +14,12 @@ class TracksController < ApplicationController
       @track.duration = track_duration
       @track.save
     end
-
-    current_user.tracks << @track
+    if current_user.tracks.exists?(youtube_id: @track.youtube_id)
+      raise
+      # handle case track already in lib
+    else
+      current_user.tracks << @track
+    end
   end
 
   def destroy
