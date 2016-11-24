@@ -23,7 +23,7 @@ class Library extends React.Component {
             </div>
             <div className='navbar-menu'>
               {this.props.current_user && <SearchInput />}
-              {!this.props.current_user && <a className='btn btn-brand' href='http://facebook.com/groups/hubum' target='_blank'><i>{_.sample(['✨', '⚡️', '🔥', '🎶'])}</i><span>Create a library</span></a>}
+              {!this.props.current_user && <a className='btn btn-brand' href='http://app.hubum.com' target='_blank'><i>{_.sample(['✨', '⚡️', '🔥', '🎶'])}</i><span>Create a library</span></a>}
 
             </div>
           </div>

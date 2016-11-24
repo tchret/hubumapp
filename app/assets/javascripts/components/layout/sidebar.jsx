@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
 
   handleMenuClick = () => {
     if(!this.props.current_user) {
-      window.open('http://facebook.com/groups/hubum', '_blank')
+      window.open('http://app.hubum.com', '_blank')
     }
   }
 
