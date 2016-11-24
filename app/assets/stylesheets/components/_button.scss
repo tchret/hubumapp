@@ -11,10 +11,59 @@
   background: white;
   border: none;
   outline: 0;
+  position: relative;
 
 
-  &:hover {
-    background: linear-gradient(#fff, #FAFAFA);
+  &-brand {
+    background-image: linear-gradient(-23deg, #3494E6, #EC6EAD);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    span {
+      margin-right: 2px !important;
+    }
+
+
+    i {
+      margin-right: 8px;
+      top: 1px;
+      font-style: normal;
+      position: relative;
+    }
+    span {
+      -webkit-background-clip: text;
+      background-image: linear-gradient(-23deg, #3494E6, #EC6EAD);
+      -webkit-text-fill-color: transparent;
+
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      background: white;
+      left: 0;
+      border-radius: 4px;
+      margin: 1px;
+      z-index: -1;
+      right: 0;
+      bottom: 0;
+    }
+
+
+    &:hover {
+      background: linear-gradient(0, #3494E6, #EC6EAD) !important;
+      background-image: linear-gradient(0, #3494E6, #EC6EAD) !important;
+
+      span {
+        background-image: linear-gradient(0, #3494E6, #EC6EAD);
+      }
+    }
+
+    &:active {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+
+    }
   }
 
   &-dark {
@@ -39,4 +88,13 @@
   }
 }
 
+button.btn-brand {
+  font-family: Atlas tr;
+  letter-spacing: -1px;
+}
 
+.btn-brand {
+  &:after {
+    background: linear-gradient(#fff, #FAFAFA);
+  }
+}

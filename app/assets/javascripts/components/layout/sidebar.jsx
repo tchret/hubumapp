@@ -8,7 +8,7 @@ class Sidebar extends React.Component {
   render() {
     return(
       <div className='sidebar'>
-        <div className='sidebar-menu padded'>
+        <div className='sidebar-menu padded' onClick={this.handleMenuClick}>
           <div className='logo'>Hubum</div>
           <div className='sidebar-menu-username-container'>
             <div className={classNames('sidebar-menu-bubble', {'is-offline': !this.props.current_user })} />
@@ -50,9 +50,14 @@ class Sidebar extends React.Component {
     this.setState({selectedId: id})
   }
 
+  handleMenuClick = () => {
+    if(!this.props.current_user) {
+      window.open('http://facebook.com/groups/hubum', '_blank')
+    }
+  }
+
 
   handleLibraryClick = () => {
-
     if(this.props.auths.canWrite) {
       if(this.state.selectedId != this.props.user.id) {
         PubSub.publish('libraryIsLoading', true)
