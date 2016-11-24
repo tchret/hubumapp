@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
           {this.props.users.map((user, i) => {
             if(user.has_tracks) {
               return(
-                <SidebarPeopleItem {... user} key={i} user={this.props.user} setActiveItem={this.setActiveItem} isActive={(this.state.selectedId == user.id) || this.props.id == this.props.user.id} />
+                <SidebarPeopleItem {... user} key={i} user={this.props.user} isClickable={this.state.selectedId != user.id} setActiveItem={this.setActiveItem} isActive={(this.state.selectedId == user.id) || this.props.id == this.props.user.id} />
               )
             }
           })}
@@ -52,16 +52,19 @@ class Sidebar extends React.Component {
 
 
   handleLibraryClick = () => {
-    PubSub.publish('libraryIsLoading', true)
 
     if(this.props.auths.canWrite) {
-      this.setActiveItem(this.props.user.id)
-      axios.get(Routes.library_user_path({id: this.props.user.username, format: 'json'}))
-        .then((response) => {
-          PubSub.publish('setLibrary', response.data)
-          PubSub.publish('libraryIsLoading', false)
-
-        })
+      if(this.state.selectedId != this.props.user.id) {
+        PubSub.publish('libraryIsLoading', true)
+        this.setActiveItem(this.props.user.id)
+        axios.get(Routes.library_user_path({id: this.props.user.username, format: 'json'}))
+          .then((response) => {
+            PubSub.publish('setLibrary', response.data)
+            PubSub.publish('libraryIsLoading', false)
+          })
+      }
+    } else {
+      window.open('http://facebook.com/groups/hubum', '_blank')
     }
   }
 
