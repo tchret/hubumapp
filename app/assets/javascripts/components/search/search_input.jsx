@@ -39,7 +39,6 @@ class SearchInput extends React.Component {
         axios.get(`https://api.discogs.com/database/search?q=${this.sanitize(track.title)}&token=ZwQzkINnLtOgZXTCnCfqLYcggUvzYxfVoebWQkeD&type=release`)
           .then((response) => {
             var firstDiscogsResult = response.data.results[0]
-            console.log(firstDiscogsResult)
 
             axios.get(firstDiscogsResult.resource_url)
               .then((response)=> {
@@ -51,7 +50,9 @@ class SearchInput extends React.Component {
                 } else {
                   multiArtists = true
                 }
+                console.log(detailedResult)
                 detailedResult.tracklist.map((tracklistItem) => {
+                  console.log(track.title.toLowerCase(), tracklistItem.title.toLowerCase())
                   if (this.sanitize(track.title.toLowerCase()).indexOf(this.sanitize(tracklistItem.title.toLowerCase())) >= 0) {
                     finalTrack['title'] = tracklistItem.title
                     if (multiArtists) {
@@ -64,27 +65,25 @@ class SearchInput extends React.Component {
                   }
                 })
 
-                if (finalTrack['title']) {
-                  finalTrack['country'] = detailedResult.country;
-                  finalTrack['genre_names'] = (detailedResult.genres || []).join(', ');
-                  finalTrack['style_names'] = (detailedResult.styles || []).join(', ');
-                  finalTrack['release_discogs_id'] = detailedResult.id;
-                  finalTrack['release_year'] = firstDiscogsResult.year;
-                  finalTrack['release_title'] = detailedResult.title;
-                  finalTrack['youtube_id'] = track.youtube_id;
-                  finalTrack['release_catno'] = firstDiscogsResult.catno;
-                  finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
-
-                  // TODO — LABEL
-
-                  // if no artist name, the title of the final track
-                  // is the title of the youtube track
-
-                  finalTrack['discogs_thumb_url'] = firstDiscogsResult.thumb
-
-                } else {
+                if (!finalTrack['title']) {
                   finalTrack['title'] = track.title
                 }
+                finalTrack['country'] = detailedResult.country;
+                finalTrack['genre_names'] = (detailedResult.genres || []).join(', ');
+                finalTrack['style_names'] = (detailedResult.styles || []).join(', ');
+                finalTrack['release_discogs_id'] = detailedResult.id;
+                finalTrack['release_year'] = firstDiscogsResult.year;
+                finalTrack['release_title'] = detailedResult.title;
+                finalTrack['youtube_id'] = track.youtube_id;
+                finalTrack['release_catno'] = firstDiscogsResult.catno;
+                finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
+
+                // TODO — LABEL
+
+                // if no artist name, the title of the final track
+                // is the title of the youtube track
+
+                finalTrack['discogs_thumb_url'] = firstDiscogsResult.thumb
 
                 axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
                   .then((response) => {
@@ -135,6 +134,6 @@ class SearchInput extends React.Component {
   }
 
   sanitize = (title) => {
-    return title.replace('&', '%26').replace(/ *\([^)]*\) */, '').replace(/ *\[[^)]*\] */, '').trim()
+    return title.replace('&', '%26').replace(/ *\([^)]*\) */, '').replace(/ *\[[^)]*\] */, '').replace('?', '').replace('.', '').trim()
   }
 }

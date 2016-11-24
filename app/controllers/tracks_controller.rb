@@ -7,9 +7,13 @@ class TracksController < ApplicationController
   end
 
   def create
-    @track = Track.new track_params
-    @track.duration = track_duration
-    @track.save
+    if Track.exists?(youtube_id: params[:track][:youtube_id])
+      @track = Track.find_by(youtube_id: params[:track][:youtube_id])
+    else
+      @track = Track.new track_params
+      @track.duration = track_duration
+      @track.save
+    end
 
     current_user.tracks << @track
   end
@@ -48,6 +52,5 @@ class TracksController < ApplicationController
       :release_label_names,
       :discogs_thumb_url
     )
-
   end
 end
