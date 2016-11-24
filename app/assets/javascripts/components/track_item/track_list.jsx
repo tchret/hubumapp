@@ -118,7 +118,7 @@ class TrackList extends React.Component {
   }
 
   onPressDel = (e) => {
-    if(!_.isEmpty(this.state.selectedTrack) && this.props.isCurrentUserLib) {
+    if(!_.isEmpty(this.state.selectedTrack) && this.props.auths.canWrite) {
       e.preventDefault();
       var r = confirm(`Do you really want to delete ${this.state.selectedTrack.title}?`);
       if (r == true) {

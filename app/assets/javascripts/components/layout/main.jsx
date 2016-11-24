@@ -41,7 +41,7 @@ class Library extends React.Component {
             </div>
 
           </div>
-          <TrackList tracks={this.props.tracks} />
+          <TrackList tracks={this.props.tracks} auths={this.props.auths} />
         </div>
       </main>
     )

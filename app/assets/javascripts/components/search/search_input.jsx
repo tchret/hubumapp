@@ -30,19 +30,21 @@ class SearchInput extends React.Component {
   toggleLoadingStateWithTrack = (track) => {
     this.setState({'isLoading': true, publishingTrack: track})
     var firstDiscogsResult, detailedResult, duration, multiArtists
+    var finalTrack = {}
 
     axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${track.youtube_id}&part=contentDetails&key=AIzaSyBAk1-_dPOdWsT1aTHC9yCs4Bv6lKbGKDE`)
       .then((response) => {
         duration = response.data.items[0].contentDetails.duration
+        finalTrack['duration'] = duration
         axios.get(`https://api.discogs.com/database/search?q=${this.sanitize(track.title)}&token=ZwQzkINnLtOgZXTCnCfqLYcggUvzYxfVoebWQkeD&type=release`)
           .then((response) => {
             var firstDiscogsResult = response.data.results[0]
+            console.log(firstDiscogsResult)
 
             axios.get(firstDiscogsResult.resource_url)
               .then((response)=> {
                 var multiArtists = false
                 var detailedResult = response.data;
-                var finalTrack = {}
                 if (detailedResult.artists.length == 1 && detailedResult.artists[0].name != 'Various') {
                   finalTrack['artist_name'] = detailedResult.artists[0].name
                   finalTrack['artist_discogs_id'] = detailedResult.artists[0].id
@@ -72,7 +74,6 @@ class SearchInput extends React.Component {
                   finalTrack['youtube_id'] = track.youtube_id;
                   finalTrack['release_catno'] = firstDiscogsResult.catno;
                   finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
-                  finalTrack['duration'] = duration
 
                   // TODO — LABEL
 
