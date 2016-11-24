@@ -9,7 +9,17 @@
   <%= favicon_link_tag 'favicon.png' %>
 </head>
 <body>
+  <div class='site'>
   <%= yield %>
   <%= react_component 'YoutubePlayer' %>
+  </div>
+  <div class='responsive-explainer'>
+    <div>
+    This is supposed to be a desktop app 😇
+    <div>
+      <a href='http://facebook.com/groups/hubum'>Go to the group</a>
+    </div>
+    </div>
+  </div>
 </body>
 </html>

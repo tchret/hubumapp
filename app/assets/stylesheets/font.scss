@@ -67,3 +67,37 @@ input {
   font-family: atlas tr;
   letter-spacing: -1px;
 }
+
+body {
+  .site {
+    @media (max-width: 800px) {
+      display: none;
+      min-height: 100vh;
+    }
+  }
+
+  .responsive-explainer {
+    display: none;
+    @media (max-width: 800px) {
+      text-align: center;
+      background: #232323;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: white;
+      min-height: 100vh;
+
+      a {
+        display: inline-block;
+        margin-top: 20px;
+        opacity: 0.7;
+        color: white;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
