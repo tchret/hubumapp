@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
           <div className='sidebar-people-title'>
             MENU
           </div>
-          <div className={classNames('sidebar-channel-item', {'is-active': this.props.auths.canWrite && this.state.selectedId == this.props.user.id})} onClick={this.handleLibraryClick}>
+          <div className={classNames('sidebar-channel-item', {'is-active': this.state.selectedId == this.props.current_user.id})} onClick={this.handleLibraryClick}>
             <i>👑</i>
             library
           </div>
@@ -58,11 +58,11 @@ class Sidebar extends React.Component {
 
 
   handleLibraryClick = () => {
-    if(this.props.auths.canWrite) {
-      if(this.state.selectedId != this.props.user.id) {
+    if(this.props.user_signed_in) {
+      if(this.state.selectedId != this.props.current_user.id) {
         PubSub.publish('libraryIsLoading', true)
-        this.setActiveItem(this.props.user.id)
-        axios.get(Routes.library_user_path({id: this.props.user.username, format: 'json'}))
+        this.setActiveItem(this.props.current_user.id)
+        axios.get(Routes.library_user_path({id: this.props.current_user.username, format: 'json'}))
           .then((response) => {
             PubSub.publish('setLibrary', response.data)
             PubSub.publish('libraryIsLoading', false)
