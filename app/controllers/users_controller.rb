@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @tracks = @user.tracks.order(created_at: :desc)
-    @users = User.where.not(id: [current_user.try(:id)])
+    @users = User.where.not(id: [current_user.try(:id)]).joins(:tracks).uniq.all
   end
 
   def library

@@ -26,4 +26,4 @@
 
         button type="submit" class="btn btn-brand"
           i = ['✨', '⚡️', '🔥', '🎶'].sample
-          span = 'Create your library'
+          span = (current_user.tracks.any? ? 'Update your profile' : 'Create your library')
