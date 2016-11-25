@@ -4,7 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if user
       if user.persisted?
         sign_in user, event: :authentication
-        if user.username
+        if user.username && user.username != ""
           redirect_to library_path(user.username)
         else
          redirect_to welcome_path
