@@ -32,8 +32,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   devise :omniauthable, omniauth_providers: [:facebook]
-  named_scope :with_at_least_one_track, :joins => :user_tracks,
-    :group => 'users.id'
 
   has_and_belongs_to_many :tracks
 
