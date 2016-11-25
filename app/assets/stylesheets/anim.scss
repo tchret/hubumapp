@@ -1,0 +1,14 @@
+.bounce {
+  animation: bounce .5s ease forwards;
+  transform: scale(1)
+
+}
+@keyframes bounce {
+  50% {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

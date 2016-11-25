@@ -114,6 +114,10 @@ class TrackList extends React.Component {
     var tracks = this.state.tracks
     track['justAdded'] = true
     tracks.unshift(track)
+
+    if(this.state.tracks.length == 1) {
+      this.props.setEmpty(false)
+    }
     this.setState({ tracks: tracks })
   }
 
@@ -127,6 +131,7 @@ class TrackList extends React.Component {
             var tracks = this.state.tracks
             _.remove(tracks, function(track) { return track.id == response.data.id })
             this.setState({tracks: tracks})
+
             if(this.state.currentTrack.id == response.data.id) {
               PubSub.publish('setYoutubeTrack', {});
             }

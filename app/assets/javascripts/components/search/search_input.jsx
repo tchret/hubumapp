@@ -5,12 +5,15 @@ class SearchInput extends React.Component {
   }
   render() {
     return (
+      <div>
+      <div id='input-container-filter' onClick={(e) => { e.target.outerHTML = ""; delete e.target }} />
       <div className='input-container' onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
         <span>
           🔎
         </span>
-        <input ref='input' type='text' className='input search' placeholder='search a track' onKeyUp={this.handleSearch} onClick={this.handleClick} />
+        <input ref='input' type='text' className='input search' placeholder='search a track' id='search' onKeyUp={this.handleSearch} onClick={this.handleClick} />
         {this.state.isActive && <PopoverSearch isLoading={this.state.isLoading} tracks={this.state.tracks} toggleLoadingStateWithTrack={this.toggleLoadingStateWithTrack} publishingTrack={this.state.publishingTrack} />}
+      </div>
       </div>
     )
   }

@@ -23,6 +23,8 @@
     z-index: 0;
     position: relative;
     min-height: 100vh;
+    display: flex;
+    flex-flow: column;
   }
 }
 
@@ -47,4 +49,44 @@
   }
 }
 
+.main-empty-screen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+  margin-top: -100px;
+  position: relative;
+  z-index: 9;
+  .input-container {
+    text-align: center;
+    margin-top: 20px;
 
+  }
+  &-title {
+    color: #585858;
+    a {
+      color: darken(#585858, 20%);
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:hover {
+        color: darken(#585858, 50%);
+      }
+    }
+  }
+
+  &-emoji {
+    text-align: center;
+    font-size: 70px;
+  }
+}
+
+.main.is-empty {
+
+  .navbar-wrapper {
+    opacity: 0;
+  }
+  .user-profile {
+    opacity: 0;
+  }
+}
