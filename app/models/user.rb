@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook]
 
   has_and_belongs_to_many :tracks
+  validates :email, presence: true
+  validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+  validates_uniqueness_of :username, case_sensitive: false
+  validates_length_of :username, maximum: 15
 
   def self.find_for_facebook_oauth(auth)
       user_params = auth.to_h.slice(:provider, :uid)

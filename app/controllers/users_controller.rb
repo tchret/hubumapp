@@ -18,8 +18,7 @@ class UsersController < ApplicationController
     if current_user.save
       redirect_to root_path
     else
-      render params[:error_page]
-      raise
+      render :welcome
     end
   end
 

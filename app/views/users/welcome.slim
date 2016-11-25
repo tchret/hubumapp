@@ -5,16 +5,22 @@
       = "Welcome #{current_user.first_name}".html_safe
     div.form-subtitle
       = 'You are about to join <strong>Hubum</strong>, the music libraries network<br/> enter your <span>username</span> & an <span>email</span> to get started'.html_safe
+    - current_user.errors.messages.any?
+      div class='form-errors'
+        - current_user.errors.messages.each do |key, array|
+          div
+            = key.to_s + " "
+            = array[0]
 
-    = simple_form_for current_user, html: {class: 'form'} do |f|
+    = simple_form_for current_user, html: {class: 'form no-errors'} do |f|
       .input-wrapper
         .input-container
           span = "👤"
-          = f.input :username, type: :text, placeholder: 'tchret', label: false
+          = f.input :username, type: :text, placeholder: 'username', maxlength: 15,  label: false
       .input-wrapper
         .input-container
           span = "✉️"
-          = f.input :email, type: :email, placeholder: 'tchret@hubum.com', label: false
+          = f.input :email, type: :email, placeholder: 'email@hubum.com', label: false
 
       div class='form-btn-container is-on-left'
 

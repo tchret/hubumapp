@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   get '/welcome', to: 'users#welcome', as: :welcome
   get '/:username', to: 'users#show', as: :library
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

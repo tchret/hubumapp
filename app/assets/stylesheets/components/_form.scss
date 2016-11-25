@@ -1,5 +1,15 @@
-.form {
+.form.no-errors {
+  .error {
+    display: none;
+  }
+}
 
+.form-errors {
+  color: #e74c3c;
+  margin: 20px 0;
+  div {
+    margin-bottom: 5px;
+  }
 }
 
 .form-title {

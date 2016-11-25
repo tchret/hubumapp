@@ -41,7 +41,13 @@ input[type="text"], input[type='email'] {
     width: 200px;
   }
 }
-.input-container { position: relative }
+.input-container {
+  position: relative;
+  input {
+    width: 220px;
+
+  }
+}
 
 .input-container > span {
   position: absolute;
