@@ -16,7 +16,7 @@ class SidebarPeopleItem extends React.Component {
   handleClick = () => {
     if (this.props.isClickable) {
       PubSub.publish('libraryIsLoading', true)
-      this.props.setActiveItem(this.props.id)
+      this.props.setActiveItem(this.props)
       axios.get(Routes.library_user_path({id: this.props.username, username: this.props.username, format: 'json'}))
         .then((response) => {
           PubSub.publish('setLibrary', response.data)

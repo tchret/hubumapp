@@ -31,6 +31,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-mroderick--PubSubJS'
   gem 'rails-assets-mdi'
   gem 'rails-assets-keymaster'
+  gem 'rails-assets-history'
 end
 
 # Use ActiveModel has_secure_password

@@ -135,6 +135,7 @@ GEM
       sprockets-rails
     rails-assets-axios (0.13.1)
     rails-assets-classnames (2.2.5)
+    rails-assets-history (1.8.0)
     rails-assets-keymaster (1.6.3)
     rails-assets-lodash (4.15.0)
     rails-assets-mdi (1.5.54)
@@ -229,6 +230,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails-assets-axios!
   rails-assets-classnames!
+  rails-assets-history!
   rails-assets-keymaster!
   rails-assets-lodash!
   rails-assets-mdi!
