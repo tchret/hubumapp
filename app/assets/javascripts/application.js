@@ -12,7 +12,6 @@
 //
 //= require js-routes
 //= require keymaster
-//= require image_loaded.min.js
 //= require PubSubJS
 //= require react
 //= require react_ujs
