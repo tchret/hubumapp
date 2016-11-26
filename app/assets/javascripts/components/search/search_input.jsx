@@ -42,62 +42,68 @@ class SearchInput extends React.Component {
         axios.get(`https://api.discogs.com/database/search?q=${this.sanitize(track.title)}&token=ZwQzkINnLtOgZXTCnCfqLYcggUvzYxfVoebWQkeD&type=release`)
           .then((response) => {
             var firstDiscogsResult = response.data.results[0]
-
-            axios.get(firstDiscogsResult.resource_url)
-              .then((response)=> {
-                var multiArtists = false
-                var detailedResult = response.data;
-                if (detailedResult.artists.length == 1 && detailedResult.artists[0].name != 'Various') {
-                  finalTrack['artist_name'] = detailedResult.artists[0].name
-                  finalTrack['artist_discogs_id'] = detailedResult.artists[0].id
-                } else {
-                  multiArtists = true
-                }
-                console.log(detailedResult)
-                detailedResult.tracklist.map((tracklistItem) => {
-                  console.log(track.title.toLowerCase(), tracklistItem.title.toLowerCase())
-                  if (this.sanitize(track.title.toLowerCase()).indexOf(this.sanitize(tracklistItem.title.toLowerCase())) >= 0) {
-                    finalTrack['title'] = tracklistItem.title
-                    if (multiArtists) {
-                      if (tracklistItem.artists.length == 1) {
-                        finalTrack['artist_name'] = tracklistItem.artists[0].name
-                      } else {
-                        // handle multi artist per track
+            if(_.isEmpty(response.data.results)) {
+              finalTrack['title'] = track.title
+              finalTrack['youtube_id'] = track.youtube_id
+              finalTrack['discogs_thumb_url'] = track.discogs_thumb_url
+            } else {
+              axios.get(firstDiscogsResult.resource_url)
+                .then((response)=> {
+                  var multiArtists = false
+                  var detailedResult = response.data;
+                  if (detailedResult.artists.length == 1 && detailedResult.artists[0].name != 'Various') {
+                    finalTrack['artist_name'] = detailedResult.artists[0].name
+                    finalTrack['artist_discogs_id'] = detailedResult.artists[0].id
+                  } else {
+                    multiArtists = true
+                  }
+                  console.log(detailedResult)
+                  detailedResult.tracklist.map((tracklistItem) => {
+                    console.log(track.title.toLowerCase(), tracklistItem.title.toLowerCase())
+                    if (this.sanitize(track.title.toLowerCase()).indexOf(this.sanitize(tracklistItem.title.toLowerCase())) >= 0) {
+                      finalTrack['title'] = tracklistItem.title
+                      if (multiArtists) {
+                        if (tracklistItem.artists.length == 1) {
+                          finalTrack['artist_name'] = tracklistItem.artists[0].name
+                        } else {
+                          // handle multi artist per track
+                        }
                       }
                     }
-                  }
-                })
-
-                if (!finalTrack['title']) {
-                  finalTrack['title'] = track.title
-                }
-                finalTrack['country'] = detailedResult.country;
-                finalTrack['genre_names'] = (detailedResult.genres || []).join(', ');
-                finalTrack['style_names'] = (detailedResult.styles || []).join(', ');
-                finalTrack['release_discogs_id'] = detailedResult.id;
-                finalTrack['release_year'] = firstDiscogsResult.year;
-                finalTrack['release_title'] = detailedResult.title;
-                finalTrack['youtube_id'] = track.youtube_id;
-                finalTrack['release_catno'] = firstDiscogsResult.catno;
-                finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
-
-                // TODO — LABEL
-
-                // if no artist name, the title of the final track
-                // is the title of the youtube track
-
-                finalTrack['discogs_thumb_url'] = firstDiscogsResult.thumb
-
-                axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
-                  .then((response) => {
-                    this.setState(this.defaultState())
-                    this.refs.input.value = ""
-                    PubSub.publish('addToTracklist', response.data);
                   })
-                // console.log(firstDiscogsResult)
-                // console.log('discogs release', detailedResult)
-                // console.log('final track', finalTrack)
+
+                  if (!finalTrack['title']) {
+                    finalTrack['title'] = track.title
+                  }
+                  finalTrack['country'] = detailedResult.country;
+                  finalTrack['genre_names'] = (detailedResult.genres || []).join(', ');
+                  finalTrack['style_names'] = (detailedResult.styles || []).join(', ');
+                  finalTrack['release_discogs_id'] = detailedResult.id;
+                  finalTrack['release_year'] = firstDiscogsResult.year;
+                  finalTrack['release_title'] = detailedResult.title;
+                  finalTrack['youtube_id'] = track.youtube_id;
+                  finalTrack['release_catno'] = firstDiscogsResult.catno;
+                  finalTrack['release_label_names'] = (firstDiscogsResult.label || []).join(', ')
+
+                  // TODO — LABEL
+
+                  // if no artist name, the title of the final track
+                  // is the title of the youtube track
+
+                  finalTrack['discogs_thumb_url'] = firstDiscogsResult.thumb
+                  // console.log(firstDiscogsResult)
+                  // console.log('discogs release', detailedResult)
+                  // console.log('final track', finalTrack)
+                })
+            }
+            axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
+              .then((response) => {
+                this.setState(this.defaultState())
+                this.refs.input.value = ""
+                PubSub.publish('addToTracklist', response.data);
               })
+
+
           })
       })
   }
