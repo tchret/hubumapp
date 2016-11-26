@@ -77,10 +77,10 @@ class Sidebar extends React.Component {
     var that = this
    window.onpopstate = function(event) {
     var username = document.location.pathname.replace('/', '')
+    PubSub.publish('libraryIsLoading', true)
     axios.get(Routes.library_user_path({id: username, username: username, format: 'json'}))
       .then((response) => {
         PubSub.publish('setLibrary', response.data)
-        PubSub.publish('libraryIsLoading', false)
         that.setState({selectedUser: response.data.user})
       })
    }
