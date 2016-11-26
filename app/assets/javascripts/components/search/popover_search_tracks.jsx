@@ -10,9 +10,10 @@ class PopoverSearchTracks extends React.Component {
     }
   }
   render() {
+    var hasSelectedItem = !_.isEmpty(this.state.selectedTrack) ? 'has-selected-item' : ''
     return(
       <div className='popover-search-tracks-container'>
-        <div className={classNames('popover-search-tracks', {'has-selected-item': !_.isEmpty(this.state.selectedTrack) })}>
+        <div className={`popover-search-tracks ${hasSelectedItem}`}>
           {this.props.tracks.map((track, i) => {
             return(
               <PopoverSearchTrackItem

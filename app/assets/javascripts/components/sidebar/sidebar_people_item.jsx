@@ -3,8 +3,9 @@ class SidebarPeopleItem extends React.Component {
     super(props)
   }
   render() {
+    var isActive = this.props.isActive ? 'is-active' : ''
     return(
-      <a className={classNames('sidebar-channel-item sidebar-people-item', {'is-active': this.props.isActive})} onClick={this.handleClick}>
+      <a className={`sidebar-channel-item sidebar-people-item ${isActive}`} onClick={this.handleClick}>
         <div>
           <span><img src={this.props.facebook_picture_url} /></span>
           <span>{this.props.username}</span>

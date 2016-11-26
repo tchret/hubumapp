@@ -1,7 +1,9 @@
 class TrackItem extends React.Component {
   render() {
+    var isSelected = this.props.isSelected ? 'is-selected' : ''
+    var justAdded = this.props.justAdded ? 'just-added' : ''
     return(
-      <div className={classNames('track-item', {'is-selected': this.props.isSelected, 'just-added': this.props.justAdded})} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} >
+      <div className={`track-item ${justAdded} ${isSelected}`} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} >
         <div className='track-item-bg' />
         <TrackItemThumbnail {... this.props} isCurrentTrack={this.props.isCurrentTrack} isPlaying={this.props.isPlaying} isPaused={this.props.isPaused} />
         <div className='track-item-infos'>

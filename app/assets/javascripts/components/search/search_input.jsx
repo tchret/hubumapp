@@ -46,6 +46,13 @@ class SearchInput extends React.Component {
               finalTrack['title'] = track.title
               finalTrack['youtube_id'] = track.youtube_id
               finalTrack['discogs_thumb_url'] = track.discogs_thumb_url
+
+              axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
+                .then((response) => {
+                  this.setState(this.defaultState())
+                  this.refs.input.value = ""
+                  PubSub.publish('addToTracklist', response.data);
+                })
             } else {
               axios.get(firstDiscogsResult.resource_url)
                 .then((response)=> {
@@ -94,14 +101,15 @@ class SearchInput extends React.Component {
                   // console.log(firstDiscogsResult)
                   // console.log('discogs release', detailedResult)
                   // console.log('final track', finalTrack)
+                  axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
+                    .then((response) => {
+                      this.setState(this.defaultState())
+                      this.refs.input.value = ""
+                      PubSub.publish('addToTracklist', response.data);
+                    })
                 })
             }
-            axios.railsPost(Routes.tracks_path({format: 'json'}), {track: finalTrack})
-              .then((response) => {
-                this.setState(this.defaultState())
-                this.refs.input.value = ""
-                PubSub.publish('addToTracklist', response.data);
-              })
+
 
 
           })

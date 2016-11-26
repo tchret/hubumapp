@@ -3,13 +3,14 @@ class Library extends React.Component {
     super(props)
     this.state = {
       isLoading: false,
-      isEmpty: _.isEmpty(this.props.tracks),
-      imageLoaded: false
+      isEmpty: _.isEmpty(this.props.tracks)
     }
   }
   render() {
+    var isLoading = this.state.isLoading ? 'is-loading' : '';
+    var isEmpty = this.state.isEmpty ? 'is-empty' : '';
     return(
-      <main className={classNames('main', {'is-loading': this.state.isLoading, 'is-empty': this.state.isEmpty})} >
+      <main className={`main ${isLoading} ${isEmpty}`} >
         {this.state.isLoading && <div className='main-loader'>loading</div>}
         <div className='navbar-wrapper'>
           <div className='navbar'>
@@ -30,20 +31,7 @@ class Library extends React.Component {
           </div>
         </div>
         <div className='main-content'>
-          <div className='user-profile'>
-            <div className={classNames('user-profile-avatar', {'is-loaded': this.state.imageLoaded})}>
-              <img src={this.props.user.facebook_picture_url} onLoad={this.handleLoad} />
-            </div>
-            <div>
-              <div className='user-profile-fullname'>
-                {this.props.user.first_name} {this.props.user.last_name}
-              </div>
-              <div className='user-profile-tagline'>
-                "Digger by day, digger by night"
-              </div>
-            </div>
-
-          </div>
+          <UserProfile {... this.props.user} />
           {this.state.isEmpty && this.props.current_user &&
               <div className='main-empty-screen'><div><div className='main-empty-screen-emoji'>~~🚣~</div><div className='main-empty-screen-title'>Hey @{this.props.current_user.username}! <a onClick={() => {document.getElementById('search').focus()}}>Add your first track</a></div><SearchInput /></div></div>
           }
@@ -64,10 +52,6 @@ class Library extends React.Component {
     myImage.src = this.props.user.facebook_picture_url
 
     myImage.onload = () => { this.setState({ imageLoaded: true }) }
-  }
-
-  handleLoad = () => {
-    this.setState({ imageLoaded: true })
   }
 
   componentWillReceiveProps() {

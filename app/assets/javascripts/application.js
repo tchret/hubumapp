@@ -20,4 +20,3 @@
 //= require lodash
 //= require classnames
 //= require components
-//= require_tree .

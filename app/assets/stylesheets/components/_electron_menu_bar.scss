@@ -1,0 +1,13 @@
+.electron-menu-bar {
+  background: red;
+  height: 22px;
+  position: fixed;
+  left: 0;
+  z-index: 9999;
+  right: 0;
+  top: 0;
+}
+
+body {
+  user-select: none;
+}

@@ -1,9 +1,12 @@
 class PopoverSearchTrackItem extends React.Component {
   render() {
     var track = this.mountTrack()
+    var isSelected = this.props.selected ? 'is-selected' : '';
+    var isPlaying = this.props.isPlaying ? 'is-playing' : '';
+    var isPaused = this.props.isPaused ? 'is-paused' : '';
     return(
       <div
-        className={classNames('popover-search-track-item', {'is-selected': this.props.selected, 'is-playing': this.props.isPlaying, 'is-paused': this.props.isPaused})}
+        className={`popover-search-track-item ${isSelected} ${isPlaying} ${isPaused}`}
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
       >

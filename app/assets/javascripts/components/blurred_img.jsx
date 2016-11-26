@@ -10,8 +10,10 @@ class BlurredImg extends React.Component {
     var style = {
       backgroundImage: `url(${this.props.url})`
     }
+
+    var isLoaded = this.state.imageLoaded ? 'is-loaded' : ''
     return(
-      <div className={classNames('blurred-img-container', {'is-loaded': this.state.imageLoaded})}>
+      <div className={isLoaded}>
         <div className='blurred-img'  style={style}  />
       </div>
     )

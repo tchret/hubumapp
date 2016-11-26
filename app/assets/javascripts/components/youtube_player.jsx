@@ -9,8 +9,9 @@ class YoutubePlayer extends React.Component {
   }
 
   render() {
+    var isActive = this.state.track.youtube_id != null ? 'is-active' : false
     return(
-      <div className={classNames('youtube-player', {'is-active': this.state.track.youtube_id != null})} >
+      <div className={`youtube-player ${isActive}`} >
         <div id="video"></div>
       </div>
     )
