@@ -20,7 +20,8 @@ class BlurredImg extends React.Component {
   componentDidMount() {
     var myImage =  new Image()
     myImage.src = this.props.url
-
     myImage.onload = () => { this.setState({ imageLoaded: true }) }
   }
+
+
 }

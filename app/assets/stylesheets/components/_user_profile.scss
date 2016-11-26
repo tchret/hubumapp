@@ -20,6 +20,17 @@
   width: 80px;
   height: 80px;
   margin-right: 10px;
+
+  img {
+    opacity: 0;
+    transition: .2s ease;
+  }
+
+  &.is-loaded {
+    img {
+      opacity: 1;
+    }
+  }
 }
 
 .user-profile-fullname {

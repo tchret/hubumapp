@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
     return(
       <div className='dashboard'>
         <Sidebar {... this.props} />
-        <Library {... this.state.library || this.props} />
+        <Library {... this.state.library || this.props} emptyLib={this.emptyLib} />
       </div>
     )
   }
@@ -20,5 +20,18 @@ class Dashboard extends React.Component {
 
   setLibrary = (msg, library) => {
     this.setState({ library: library })
+  }
+
+  emptyLib = () => {
+    this.setState({library: this.emptyLibObject()})
+  }
+
+  emptyLibObject = () => {
+    return {
+      auths: {},
+      current_user: {},
+      tracks: [],
+      user: {}
+    }
   }
 }
