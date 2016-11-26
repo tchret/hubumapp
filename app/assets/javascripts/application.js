@@ -19,6 +19,5 @@
 //= require axios
 //= require axios_ujs
 //= require lodash
-//= require history
 //= require components
 //= require_tree .
