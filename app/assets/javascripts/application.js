@@ -18,5 +18,6 @@
 //= require axios
 //= require axios_ujs
 //= require lodash
+//= require classnames
 //= require components
 //= require_tree .
