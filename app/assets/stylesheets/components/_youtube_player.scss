@@ -14,7 +14,6 @@
   z-index: 3;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   pointer-events: all;
-
   opacity: 0;
   transform: translateY(20px);
   transition: .3s ease all;
@@ -169,6 +168,18 @@
     margin-right: 5px;
     background-position: center center;
     background-size: cover;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 5px;
+      content: '';
+    }
   }
 
   &-text {
@@ -199,5 +210,9 @@
     background: transparent !important;
     color: white !important;
     padding: 3px !important;
+  }
+
+  .player-infos-wrapper {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
   }
 }
