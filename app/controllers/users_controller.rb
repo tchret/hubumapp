@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to root_path if !@user
     @tracks = @user.tracks.order(created_at: :desc)
     @users = User.where.not(id: [current_user.try(:id)]).joins(:tracks).uniq.all
   end
