@@ -23,6 +23,7 @@ gem 'slim'
 gem 'yt'
 gem "js-routes"
 gem 'koala'
+gem 'pretender'
 
 
 source 'https://rails-assets.org' do

@@ -1,7 +1,18 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :library]
+  before_action :find_user, only: [:show, :library, :impersonate]
 
   def welcome
+  end
+
+  def impersonate
+    if true_user.admin
+      if true_user.id == current_user.id
+        impersonate_user(@user)
+      else
+        stop_impersonating_user
+      end
+    end
+    redirect_to root_path
   end
 
   def show

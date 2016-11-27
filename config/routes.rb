@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/:username', to: 'users#show', as: :library
 
   get 'r/:release', to: 'pages#release'
+  get '/:username/impersonate', to: 'users#impersonate'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
