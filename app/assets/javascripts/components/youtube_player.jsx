@@ -21,9 +21,7 @@ class YoutubePlayer extends React.Component {
 
 
         <div className={`youtube-player ${isActive}`} >
-        <div className='player-title-bar' >
-          yo
-        </div>
+        <div className='player-title-bar' />
           <div className={!this.state.iframeClickable && 'is-not-clickable'}>
             <div id="video" ></div>
           </div>
