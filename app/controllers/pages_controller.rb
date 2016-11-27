@@ -6,4 +6,8 @@ class PagesController < ApplicationController
       redirect_to user_facebook_omniauth_authorize_path
     end
   end
+
+  def release
+    redirect_to "http://old.hubum.com/r/#{params[:release]}"
+  end
 end
