@@ -4,12 +4,10 @@
   height: 193px;
 }
 .youtube-player {
-  opacity: .95;
   border-radius: 5px;
   overflow: hidden;
   height: 100%;
   display: none;
-  background: black;
   position: relative;
   width: 160 * 1.7 * 1px;
   height: 90 * 1.7 * 1px;
@@ -17,9 +15,44 @@
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   pointer-events: all;
 
+  opacity: 0;
+  transform: translateY(20px);
+  transition: .3s ease all;
+
+  &.is-ready {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.is-loading {
+    .player-infos {
+      opacity: 0;
+    }
+  }
 
   &:hover {
-    opacity: 1;
+    .player-infos {
+      color: rgba(black, .8);
+      background: rgba(white, .95);
+      padding: 4px;
+      transform: translateY(-40px);
+    }
+
+    .player-infos-wrapper {
+      background: none;
+      pointer-events: none;
+    }
+  }
+
+  iframe {
+    opacity: .95;
+  }
+
+
+  &:hover {
+    iframe {
+      opacity: 1;
+    }
   }
 
   &.is-active {
@@ -43,7 +76,7 @@
   position: absolute;
   height: 20px;
   top: 0px;
-  z-index: 9;
+  z-index: 999;
   left: 0px;
   cursor: move;
   right: 0px;
@@ -70,6 +103,13 @@
   &:before {
     transform: translateX(90%)
   }
+
+}
+
+.player-title-bar:hover + div .player-infos  {
+  transform: none !important;
+  background: transparent !important;
+  color: white !important;
 }
 
 [data-react-class="YoutubePlayer"] {
@@ -85,4 +125,69 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+}
+
+.player-infos-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  display: flex;
+  align-items: flex-end;
+  z-index: 9;
+}
+
+.player-infos {
+  display: flex;
+  padding: 3px;
+  align-items: center;
+  margin: 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 13px;
+  color: white;
+  pointer-events: all;
+  transition: .3s ease all;
+
+  &-release {
+    flex: 0 0 35px;
+    height: 35px;
+    display: block;
+    background-color: rgba(white, .1);
+    border-radius: 5px;
+    margin-right: 5px;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  &-text {
+    padding-top: 1px;
+    width: 201px;
+  }
+
+  &-title {
+    white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+  }
+
+  &-beta {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-top: 1px;
+    overflow: hidden;
+    color: #a7a7a7;
+  }
+}
+
+.is-not-clickable {
+  .player-infos {
+    transform: none !important;
+    background: transparent !important;
+    color: white !important;
+  }
 }

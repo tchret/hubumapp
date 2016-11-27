@@ -5,12 +5,16 @@ class YoutubePlayer extends React.Component {
       track: {},
       playerReady: false,
       playState: 0,
-      iframeClickable: false
+      iframeClickable: true,
+      isLoading: false
     }
   }
 
   render() {
     var isActive = this.state.track.youtube_id != null ? 'is-active' : false
+    var playerReady = this.state.playerReady ? 'is-ready' : false
+    var isLoading = this.state.isLoading ? 'is-loading' : false
+    var style = {backgroundImage: `url('${this.state.track.discogs_thumb_url}')`}
     return(
       <Draggable
         onStart={this.handleDrag}
@@ -20,9 +24,22 @@ class YoutubePlayer extends React.Component {
         <div className='youtube-player-container'>
 
 
-        <div className={`youtube-player ${isActive}`} >
+        <div className={`youtube-player ${isActive} ${isLoading} ${playerReady}`} >
         <div className='player-title-bar' />
           <div className={!this.state.iframeClickable && 'is-not-clickable'}>
+            <div className='player-infos-wrapper'>
+              <div className='player-infos'>
+                <div className='player-infos-release' style={style} />
+                <div className='player-infos-text'>
+                  <div className='player-infos-title'>
+                    {this.state.track.title}
+                  </div>
+                  <div className='player-infos-beta'>
+                    {this.state.track.artist_name}
+                  </div>
+                </div>
+              </div>
+            </div>
             <div id="video" ></div>
           </div>
         </div>
@@ -56,6 +73,7 @@ class YoutubePlayer extends React.Component {
 
   loadMedia = (e) => {
     // Create the player object when API is ready
+    this.setState({ isLoading: true })
     var player;
     var that = this;
      this.player = new YT.Player('video', {
@@ -81,6 +99,15 @@ class YoutubePlayer extends React.Component {
   onPlayerStateChange = (e) => {
     this.setState({playState: e.data})
     PubSub.publish('playStateWithId', {playState: e.data, id: this.state.track.youtube_id})
+    if(e.data == 3) {
+      this.setState({isLoading: true})
+    }
+
+    if(e.data == 1) {
+      setTimeout(() => {
+        this.setState({ isLoading: false })
+      }, 3000)
+    }
   }
 
   onPlayerReady = (e) => {
