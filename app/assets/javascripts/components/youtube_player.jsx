@@ -4,16 +4,32 @@ class YoutubePlayer extends React.Component {
     this.state = {
       track: {},
       playerReady: false,
-      playState: 0
+      playState: 0,
+      iframeClickable: false
     }
   }
 
   render() {
     var isActive = this.state.track.youtube_id != null ? 'is-active' : false
     return(
-      <div className={`youtube-player ${isActive}`} >
-        <div id="video"></div>
-      </div>
+      <Draggable
+        onStart={this.handleDrag}
+        onStop={this.handleStop}
+        bounds={'[data-react-class="YoutubePlayer"]'}
+        >
+        <div className='youtube-player-container'>
+
+
+        <div className={`youtube-player ${isActive}`} >
+        <div className='player-title-bar' >
+          yo
+        </div>
+          <div className={!this.state.iframeClickable && 'is-not-clickable'}>
+            <div id="video" ></div>
+          </div>
+        </div>
+        </div>
+      </Draggable>
     )
   }
 
@@ -71,6 +87,14 @@ class YoutubePlayer extends React.Component {
 
   onPlayerReady = (e) => {
     this.setState({playerReady: true})
+  }
+
+  handleDrag = (e) => {
+    this.setState({ iframeClickable: false })
+  }
+
+  handleStop = (e) => {
+    this.setState({ iframeClickable: true })
   }
 
   handleSpacePress = (e) => {
