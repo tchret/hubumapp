@@ -24,7 +24,7 @@ gem 'yt'
 gem "js-routes"
 gem 'koala'
 gem 'pretender'
-
+gem 'rails_admin'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-axios'
