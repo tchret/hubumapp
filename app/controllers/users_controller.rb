@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @tracks = @user.tracks.order(created_at: :desc)
-      @users = User.where.not(id: [current_user.try(:id)]).joins(:tracks).uniq.all
+      @users = User.where(featured: true).where.not(id: [current_user.try(:id)]).joins(:tracks).uniq.all
     end
   end
 
