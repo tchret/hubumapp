@@ -74,6 +74,7 @@
   border-radius: 50%;
   margin-right: 20px;
 
+
   &:after, &:before {
     content: '';
     height: 4px;
@@ -99,6 +100,14 @@
   cursor: pointer;
   text-decoration: none;
   outline: 0;
+
+  span {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: rgba(black, 0.25);
+  }
 
   i {
     margin-right: 10px;

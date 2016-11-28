@@ -3,6 +3,7 @@ JsRoutes.setup do |config|
     /^search_tracks$/,
     /^tracks$/,
     /^track$/,
-    /^library_user$/
+    /^library_user$/,
+    /^desktop_downloads$/
   ]
 end

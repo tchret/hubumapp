@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :downloads, path: 'download', only: [] do
+    collection do
+      get :desktop
+    end
+  end
+
   get '/welcome', to: 'users#welcome', as: :welcome
   get '/:username', to: 'users#show', as: :library
 

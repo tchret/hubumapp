@@ -35,6 +35,7 @@
       -webkit-background-clip: text;
       background-image: linear-gradient(-23deg, #3494E6, #EC6EAD);
       -webkit-text-fill-color: transparent;
+      cursor: pointer;
 
     }
     &:after {
@@ -47,6 +48,7 @@
       margin: 1px;
       z-index: -1;
       right: 0;
+      cursor: pointer;
       bottom: 0;
     }
 
