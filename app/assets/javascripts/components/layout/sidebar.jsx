@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
           })}
         </div>
         { this.props.user_signed_in ?
-          <SidebarMessage title={'Hubum'} description={"is on desktop! Download, connect your account and your in."} url={'/download/desktop'} cta={'Download the app'} classes='download-desktop' />
+          false && <SidebarMessage title={'Hubum'} description={"is on desktop! Download, connect your account and your in."} url={'/download/desktop'} cta={'Download the app'} classes='download-desktop' />
         :
           <SidebarMessage title={'Hubum'} description={"is a private network of music libraries."} url={"http://app.hubum.com"} cta={'Create a library'} />
         }
