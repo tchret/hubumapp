@@ -84,6 +84,7 @@
   margin-right: 20px;
 
 
+
   &:after, &:before {
     content: '';
     height: 4px;
@@ -132,8 +133,30 @@
   }
 }
 
-.sidebar-people-item {
+.sidebar-channel-item {
+  display: flex;
+  align-items: center;
+  height: 31px;
+  align-items: center;
 
+  &.is-playing {
+    .mdi-volume-high, .mdi-volume-low {
+      display: inline-block;
+      opacity: 1;
+      height: 17px;
+    }
+
+    .mdi-volume-low {
+      position: relative;
+      left: -3px;
+    }
+  }
+
+  i {
+    opacity: 0;
+    transition: .3s ease;
+    margin-left: auto;
+  }
   & > div {
     display: table;
   }

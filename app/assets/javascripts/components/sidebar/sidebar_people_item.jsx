@@ -4,12 +4,15 @@ class SidebarPeopleItem extends React.Component {
   }
   render() {
     var isActive = this.props.isActive ? 'is-active' : ''
+    var isPlaying = this.props.isPlaying || this.props.paused ? 'is-playing' : ''
+    var iconClass = this.props.paused ? 'mdi-volume-low' : (this.props.isPlaying ? 'mdi-volume-high' : '')
     return(
-      <a className={`sidebar-channel-item sidebar-people-item ${isActive}`} onClick={this.handleClick}>
+      <a className={`sidebar-channel-item sidebar-people-item ${isActive} ${isPlaying}`} onClick={this.handleClick}>
         <div>
           <span><img src={this.props.facebook_picture_url} /></span>
           <span>{this.props.username}</span>
         </div>
+        <i className={`mdi ${iconClass}`} />
       </a>
     )
   }

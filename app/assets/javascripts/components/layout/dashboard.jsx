@@ -6,13 +6,14 @@ class Dashboard extends React.Component {
       isLoading: false,
       currentTrack: {},
       nowPlaying: false,
-      paused: false
+      paused: false,
+      playingLibId: null
     }
   }
   render() {
     return(
       <div className='dashboard'>
-        <Sidebar {... this.props} emptyLib={this.emptyLib} />
+        <Sidebar {... this.props} emptyLib={this.emptyLib} playingLibId={this.state.playingLibId} nowPlaying={this.state.nowPlaying} paused={this.state.paused} />
         <div className='main-wrapper'>
           {this.state.isLoading && <div className='main-loader'>loading</div>}
           {this.state.library && !_.isEmpty(this.state.library.user) && <Library {... this.state.library } currentTrack={this.state.currentTrack} nowPlaying={this.state.nowPlaying} paused={this.state.paused} />}
@@ -36,7 +37,10 @@ class Dashboard extends React.Component {
   }
 
   setCurrentTrack = (msg, track) => {
-    this.setState({ currentTrack: track })
+    this.setState({
+      currentTrack: track,
+      playingLibId: this.state.library.user.id
+    })
   }
 
   emptyLibObject = () => {

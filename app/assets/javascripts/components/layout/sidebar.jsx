@@ -8,6 +8,8 @@ class Sidebar extends React.Component {
   render() {
     var isOffline = !this.props.current_user ? 'is-offline' : ''
     var libraryActive = this.props.current_user && this.state.selectedUser.id == this.props.current_user.id ? 'is-active' : '';
+    var libraryNowPlaying = this.props.nowPlaying || this.props.paused && (this.props.current_user && this.props.current_user.id == this.props.playingLibId) ? 'is-playing' : ''
+    var libraryIconClass = this.props.current_user && this.props.current_user.id == this.props.playingLibId && this.props.paused ? 'mdi-volume-low' : (this.props.current_user && this.props.current_user.id == this.props.playingLibId && this.props.nowPlaying ? 'mdi-volume-high' : '')
 
     return(
       <div className='sidebar'>
@@ -24,12 +26,13 @@ class Sidebar extends React.Component {
           <div className='sidebar-people-title'>
             MENU
           </div>
-          <div className={`sidebar-channel-item ${libraryActive}`} onClick={this.handleLibraryClick}>
-            <i>👑</i>
+          <div className={`sidebar-channel-item ${libraryActive} ${libraryNowPlaying}`} onClick={this.handleLibraryClick}>
+            <span>👑</span>
             library
+            <i className={`mdi ${libraryIconClass}`} />
           </div>
           <a className='sidebar-channel-item' href='http://www.facebook.com/groups/hubum' target='_blank'>
-            <i>👯</i>
+            <span>👯</span>
             community
           </a>
         </div>
@@ -45,7 +48,7 @@ class Sidebar extends React.Component {
           {this.props.users.map((user, i) => {
             if(user.has_tracks) {
               return(
-                <SidebarPeopleItem {... user} key={i} user={this.props.user} isClickable={this.state.selectedUser.id != user.id} setActiveItem={this.setActiveItem} isActive={(this.state.selectedUser.id == user.id) || this.props.id == this.props.user.id} />
+                <SidebarPeopleItem {... user} key={i} user={this.props.user} isPlaying={user.id == this.props.playingLibId && this.props.nowPlaying} paused={user.id == this.props.playingLibId && this.props.paused} isClickable={this.state.selectedUser.id != user.id} setActiveItem={this.setActiveItem} isActive={(this.state.selectedUser.id == user.id) || this.props.id == this.props.user.id} />
               )
             }
           })}
