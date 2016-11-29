@@ -28,12 +28,14 @@ class Library extends React.Component {
             </div>
           </div>
         </div>
-        <div className='main-content'>
-          <UserProfile {... this.props.user} />
-          {this.state.isEmpty && this.props.current_user.id == this.props.user.id &&
-              <div className='main-empty-screen'><div><div className='main-empty-screen-emoji'>~~🚣~</div><div className='main-empty-screen-title'>Hey @{this.props.current_user.username}! <a onClick={() => {document.getElementById('search').focus()}}>Add your first track</a></div><SearchInput /></div></div>
-          }
-          <TrackList auths={this.props.auths} setEmpty={this.setEmpty} username={this.props.user.username} />
+        <div className='main-content-scrollable'>
+          <div className='main-content'>
+            <UserProfile {... this.props.user} />
+            {this.state.isEmpty && this.props.current_user.id == this.props.user.id &&
+                <div className='main-empty-screen'><div><div className='main-empty-screen-emoji'>~~🚣~</div><div className='main-empty-screen-title'>Hey @{this.props.current_user.username}! <a onClick={() => {document.getElementById('search').focus()}}>Add your first track</a></div><SearchInput /></div></div>
+            }
+            <TrackList auths={this.props.auths} setEmpty={this.setEmpty} username={this.props.user.username} />
+          </div>
         </div>
       </main>
     )

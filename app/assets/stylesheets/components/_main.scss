@@ -5,6 +5,7 @@
   min-height: 100vh;
 }
 .main {
+  padding-top: 80px;
   color: rgba(black, .8);
 
   &-loader {
@@ -23,12 +24,16 @@
   }
 
   &-content {
-    padding-top: 82px;
     z-index: 0;
     position: relative;
     min-height: 100vh;
     display: flex;
     flex-flow: column;
+
+    &-scrollable {
+      overflow: scroll;
+      height: calc(100vh - 80px);
+    }
   }
 }
 
