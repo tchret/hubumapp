@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   resources :users, only: [:update] do
     member do
       get :library
+      get :tracks
     end
   end
+
   resources :tracks, only: [:create, :destroy] do
     collection do
       get :search

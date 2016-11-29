@@ -4,6 +4,6 @@ JsRoutes.setup do |config|
     /^tracks$/,
     /^track$/,
     /^library_user$/,
-    /^desktop_downloads$/
+    /^tracks_user$/
   ]
 end

@@ -6,7 +6,7 @@ class TrackList extends React.Component {
       currentTrack: {},
       nowPlaying: false,
       paused: false,
-      tracks: this.props.tracks
+      tracks: []
     }
   }
 
@@ -49,9 +49,9 @@ class TrackList extends React.Component {
       this.setState({ paused: true })
     } else if(data.playState == 0) {
       // if end of track
-      var index = _.findIndex(this.props.tracks, (o) => { return o.id == this.state.currentTrack.id; });
-      if(this.props.tracks[index + 1]) {
-        PubSub.publish('setYoutubeTrack', this.props.tracks[index + 1])
+      var index = _.findIndex(this.state.tracks, (o) => { return o.id == this.state.currentTrack.id; });
+      if(this.state.tracks[index + 1]) {
+        PubSub.publish('setYoutubeTrack', this.state.tracks[index + 1])
       } else {
         PubSub.publish('setYoutubeTrack', {})
       }
@@ -70,17 +70,16 @@ class TrackList extends React.Component {
     this.setYoutubeId = PubSub.subscribe('setYoutubeTrack', this.setLoadingTrack);
     this.addToTracklist = PubSub.subscribe('addToTracklist', this.addToTracklist);
     this.playFirstTrack = PubSub.subscribe('playFirstTrack', this.playFirstTrack);
-    PubSub.subscribe('setLibrary', this.setLibrary)
 
+    axios.get(Routes.tracks_user_path({id: this.props.username}))
+      .then((response) => {
+        this.setState({tracks: response.data.tracks})
+      })
 
     window.addEventListener('mousedown', this.pageClick, false);
     key('backspace', this.onPressDel)
     key('right', this.nextTrack)
     key('left', this.prevTrack)
-  }
-
-  setLibrary = (msg, library) => {
-    this.setState({tracks: library.tracks})
   }
 
   nextTrack = (e) => {
@@ -108,6 +107,7 @@ class TrackList extends React.Component {
     PubSub.unsubscribe(this.playStateWithId)
     PubSub.unsubscribe(this.setYoutubeId)
     PubSub.unsubscribe(this.addToTracklist)
+    PubSub.unsubscribe(this.playFirstTrack)
   }
 
   addToTracklist = (msg, track) => {
@@ -142,7 +142,7 @@ class TrackList extends React.Component {
 
   playFirstTrack = (e) => {
     if(_.isEmpty(this.state.selectedTrack)) {
-      PubSub.publish('setYoutubeTrack', this.props.tracks[0])
+      PubSub.publish('setYoutubeTrack', this.state.tracks[0])
     } else {
       PubSub.publish('setYoutubeTrack', this.state.selectedTrack)
     }
@@ -163,6 +163,6 @@ class TrackList extends React.Component {
   }
 
   currentTrackIndex = () => {
-    return _.findIndex(this.props.tracks, (o) => { return o.id == this.state.currentTrack.id; });
+    return _.findIndex(this.state.tracks, (o) => { return o.id == this.state.currentTrack.id; });
   }
 }

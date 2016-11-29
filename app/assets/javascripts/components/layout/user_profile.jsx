@@ -26,7 +26,6 @@ class UserProfile extends React.Component {
   }
 
   handleLoad = () => {
-    console.log('yo')
     this.setState({ imageLoaded: true })
   }
 

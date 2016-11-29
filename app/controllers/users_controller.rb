@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :library, :impersonate]
+  before_action :find_user, only: [:show, :library, :impersonate, :tracks]
 
   def welcome
   end
@@ -19,13 +19,15 @@ class UsersController < ApplicationController
     if @user.nil?
       redirect_to root_path
     else
-      @tracks = @user.tracks.order(created_at: :desc)
       @users = User.where(featured: true).where.not(id: [current_user.try(:id)]).joins(:tracks).uniq.all
     end
   end
 
-  def library
+  def tracks
     @tracks = @user.tracks.order(created_at: :desc)
+  end
+
+  def library
   end
 
   def update

@@ -56,6 +56,7 @@ class Sidebar extends React.Component {
   }
 
   setActiveItem = (user) => {
+    this.props.emptyLib()
     this.setState({selectedUser: user})
     history.pushState(null, null, user.username);
   }

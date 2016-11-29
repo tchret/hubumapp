@@ -1,7 +1,11 @@
-.main {
+.main-wrapper {
+  position: relative;
   padding-left: 220px;
-  color: rgba(black, .8);
   background: white;
+  min-height: 100vh;
+}
+.main {
+  color: rgba(black, .8);
 
   &-loader {
     position: fixed;
