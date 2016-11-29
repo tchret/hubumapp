@@ -140,6 +140,7 @@
   align-items: center;
 
   &.is-playing {
+    color: white;
     .mdi-volume-high, .mdi-volume-low {
       display: inline-block;
       opacity: 1;
