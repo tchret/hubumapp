@@ -6,13 +6,14 @@ class TrackList extends React.Component {
       currentTrack: {},
       nowPlaying: false,
       paused: false,
-      tracks: []
+      tracks: [],
+      isLoading: true
     }
   }
 
   render() {
     return(
-      <div className='tracklist-wrapper'>
+      <div className={`tracklist-wrapper ${this.state.isLoading ? 'is-loading' : ''}`}>
         <div className='tracklist' onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
           {this.state.tracks.map((track, i) => {
             if(i != 0) {
@@ -73,7 +74,8 @@ class TrackList extends React.Component {
 
     axios.get(Routes.tracks_user_path({id: this.props.username}))
       .then((response) => {
-        this.setState({tracks: response.data.tracks})
+        this.setState({ tracks: response.data.tracks })
+        this.setState({ isLoading: false })
       })
 
     window.addEventListener('mousedown', this.pageClick, false);
