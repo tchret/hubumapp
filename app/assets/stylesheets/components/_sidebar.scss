@@ -139,20 +139,23 @@
   height: 31px;
   align-items: center;
 
+  i {
+    height: 17px;
+    font-size: 15px;
+  }
+
   &.is-playing {
     .mdi-volume-high, .mdi-volume-low {
       color: white;
       display: inline-block;
       opacity: 1;
-      height: 17px;
-      font-size: 15px;
       display: flex;
       align-items: center;
     }
 
     .mdi-volume-low {
       position: relative;
-      left: -3px;
+      left: -2.7px;
     }
   }
 
