@@ -7,8 +7,7 @@ class Sidebar extends React.Component {
   }
   render() {
     var isOffline = !this.props.current_user ? 'is-offline' : ''
-
-    var libraryActive = this.state.selectedUser.id == this.props.current_user.id ? 'is-active' : '';
+    var libraryActive = this.props.current_user && this.state.selectedUser.id == this.props.current_user.id ? 'is-active' : '';
 
     return(
       <div className='sidebar'>
