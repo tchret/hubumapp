@@ -3,7 +3,10 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       library: this.props,
-      isLoading: false
+      isLoading: false,
+      currentTrack: {},
+      nowPlaying: false,
+      paused: false
     }
   }
   render() {
@@ -12,7 +15,7 @@ class Dashboard extends React.Component {
         <Sidebar {... this.props} emptyLib={this.emptyLib} />
         <div className='main-wrapper'>
           {this.state.isLoading && <div className='main-loader'>loading</div>}
-          {this.state.library && !_.isEmpty(this.state.library.user) && <Library {... this.state.library } />}
+          {this.state.library && !_.isEmpty(this.state.library.user) && <Library {... this.state.library } currentTrack={this.state.currentTrack} nowPlaying={this.state.nowPlaying} paused={this.state.paused} />}
         </div>
       </div>
     )
@@ -20,6 +23,8 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     PubSub.subscribe('setLibrary', this.setLibrary)
+    PubSub.subscribe('setYoutubeTrack', this.setCurrentTrack);
+    PubSub.subscribe('playStateWithId', this.setplayedId);
   }
 
   setLibrary = (msg, library) => {
@@ -30,12 +35,29 @@ class Dashboard extends React.Component {
     this.setState({ library: this.emptyLibObject(), isLoading: true })
   }
 
+  setCurrentTrack = (msg, track) => {
+    this.setState({ currentTrack: track })
+  }
+
   emptyLibObject = () => {
     return {
       auths: {},
       current_user: {},
       tracks: [],
       user: {}
+    }
+  }
+
+  setplayedId = (msg, data) => {
+    if(data.playState == 1) {
+      this.setState({
+        nowPlaying: true,
+        paused: false
+      })
+    } else if (data.playState == 2) {
+      this.setState({ paused: true })
+    } else {
+      this.setState({ nowPlaying: false, paused: false })
     }
   }
 }

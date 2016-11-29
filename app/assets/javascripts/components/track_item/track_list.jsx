@@ -3,9 +3,9 @@ class TrackList extends React.Component {
     super(props)
     this.state = {
       selectedTrack: {},
-      currentTrack: {},
-      nowPlaying: false,
-      paused: false,
+      currentTrack: this.props.currentTrack,
+      nowPlaying: this.props.nowPlaying,
+      paused: this.props.paused,
       tracks: [],
       isLoading: true
     }
