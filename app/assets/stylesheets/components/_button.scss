@@ -1,7 +1,6 @@
 .btn {
   padding: 9px 12px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
   font-weight: 300;
   display: inline-block;
   cursor: pointer;
@@ -9,6 +8,7 @@
   transition: box-shadow .15s ease;
   padding-top: 11px;
   background: white;
+  border-radius: 20em;
   border: none;
   outline: 0;
   position: relative;
@@ -23,7 +23,6 @@
     span {
       margin-right: 2px !important;
     }
-
 
     i {
       margin-right: 8px;
@@ -44,7 +43,7 @@
       top: 0;
       background: white;
       left: 0;
-      border-radius: 4px;
+      border-radius: 20em;
       margin: 1px;
       z-index: -1;
       right: 0;
