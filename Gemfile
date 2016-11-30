@@ -25,6 +25,7 @@ gem "js-routes"
 gem 'koala'
 gem 'pretender'
 gem 'rails_admin'
+gem "acts_as_follower"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-axios'

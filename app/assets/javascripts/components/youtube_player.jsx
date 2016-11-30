@@ -83,7 +83,7 @@ class YoutubePlayer extends React.Component {
           showinfo: 0,
           disablekb: 0,
           iv_load_policy: 3,
-          fs: 0,
+          fs: 1,
           cc_load_policy: 0,
           rel: 0,
           controls: 2
