@@ -41,6 +41,7 @@ class Sidebar extends React.Component {
         :
           <SidebarMessage title={'Hubum'} description={"is a private network of music libraries."} url={"http://app.hubum.com"} cta={'Create a library'} />
         }
+        {this.props.current_user && <SidebarStarred setActiveItem={this.setActiveItem} />}
         <div className='sidebar-people'>
           <div className='sidebar-people-title'>
             PEOPLE<span>({this.props.users.length})</span>

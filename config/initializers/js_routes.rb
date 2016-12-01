@@ -4,6 +4,7 @@ JsRoutes.setup do |config|
     /^tracks$/,
     /^track$/,
     /^library_user$/,
-    /^tracks_user$/
+    /^tracks_user$/,
+    /^follow_user$/
   ]
 end

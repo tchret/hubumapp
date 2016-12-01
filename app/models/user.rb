@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }, allow_blank: false
   validates_uniqueness_of :username, case_sensitive: false
   validates_length_of :username, maximum: 15
+  acts_as_followable
+  acts_as_follower
 
   def self.find_for_facebook_oauth(auth)
       user_params = auth.to_h.slice(:provider, :uid)

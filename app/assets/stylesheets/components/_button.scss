@@ -7,11 +7,30 @@
   user-select: none;
   transition: box-shadow .15s ease;
   padding-top: 11px;
-  background: white;
   border-radius: 5px;
   border: none;
   outline: 0;
   position: relative;
+  background: linear-gradient(white, #FAFAFA);
+
+  &.btn-simple {
+    padding: 7px 9px;
+    padding-top: 9px;
+    transition: all .3s ease;
+    span {
+      top: 0px;
+    }
+
+    &.is-following {
+      background: #232323;
+      color: white;
+      box-shadow: 0px 0px 0px 1px #232323 !important;
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
 
 
   &-brand {

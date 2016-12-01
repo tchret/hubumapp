@@ -20,6 +20,11 @@ class UserProfile extends React.Component {
           <div className='user-profile-tagline'>
             "Digger by day, digger by night"
           </div>
+          {!this.props.isCurrentUser &&
+            <div className='user-profile-buttons'>
+              <FollowButton {... this.props} />
+            </div>
+          }
         </div>
       </div>
     )

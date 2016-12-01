@@ -80,8 +80,8 @@ class TrackList extends React.Component {
 
     window.addEventListener('mousedown', this.pageClick, false);
     key('backspace', this.onPressDel)
-    key('right', this.nextTrack)
-    key('left', this.prevTrack)
+    key('right', _.throttle(this.nextTrack, 50))
+    key('left', _.throttle(this.prevTrack, 50))
   }
 
   nextTrack = (e) => {

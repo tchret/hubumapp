@@ -3,6 +3,7 @@ class SidebarPeopleItem extends React.Component {
     super(props)
   }
   render() {
+
     var isActive = this.props.isActive ? 'is-active' : ''
     var isPlaying = this.props.isPlaying || this.props.paused ? 'is-playing' : ''
     var iconClass = this.props.paused ? 'mdi-volume-low' : (this.props.isPlaying ? 'mdi-volume-high' : '')

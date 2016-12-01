@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       get :library
       get :tracks
+      get :followers
+      post :follow
     end
   end
 

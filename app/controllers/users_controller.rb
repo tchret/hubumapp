@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :library, :impersonate, :tracks]
+  before_action :find_user, only: [:show, :library, :impersonate, :tracks, :follow, :followers]
 
   def welcome
   end
@@ -28,6 +28,15 @@ class UsersController < ApplicationController
   end
 
   def library
+  end
+
+  def follow
+    following = current_user.following?(@user)
+    user_signed_in? && following ? current_user.stop_following(@user) : current_user.follow(@user)
+    render json: {isFollowing: !following}
+  end
+
+  def followers
   end
 
   def update
